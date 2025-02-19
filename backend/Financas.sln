@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C4D61F8E-CD12-430D-81B8-CC5157D091B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financas.Api", "src\Financas.Api\Financas.Api.csproj", "{940993C0-3A23-4A34-A7B5-5ECACEECDA7C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{F74A2602-F07E-465C-A196-E5877A25D9AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financas.Test", "test\Financas.Test\Financas.Test.csproj", "{E18A0B39-7EC2-434A-B159-A5695F5DA2DA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{940993C0-3A23-4A34-A7B5-5ECACEECDA7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{940993C0-3A23-4A34-A7B5-5ECACEECDA7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{940993C0-3A23-4A34-A7B5-5ECACEECDA7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{940993C0-3A23-4A34-A7B5-5ECACEECDA7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E18A0B39-7EC2-434A-B159-A5695F5DA2DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E18A0B39-7EC2-434A-B159-A5695F5DA2DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E18A0B39-7EC2-434A-B159-A5695F5DA2DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E18A0B39-7EC2-434A-B159-A5695F5DA2DA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{940993C0-3A23-4A34-A7B5-5ECACEECDA7C} = {C4D61F8E-CD12-430D-81B8-CC5157D091B5}
+		{E18A0B39-7EC2-434A-B159-A5695F5DA2DA} = {F74A2602-F07E-465C-A196-E5877A25D9AC}
+	EndGlobalSection
+EndGlobal
