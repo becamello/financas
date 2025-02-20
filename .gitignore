@@ -8,3 +8,12 @@
 *.suo
 *.userosscache
 *.sln.docstates
+
+# Ignore arquivos de build e binários
+/bin/
+/obj/
+*.dll
+*.exe
+*.pdb
+*.cache
+*.json
