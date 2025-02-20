@@ -1,0 +1,10 @@
+# Ignore pasta obj e bin do projeto .NET
+/backend/src/Financas.Api/obj/
+/backend/src/Financas.Api/bin/
+
+# Ignore configurações do Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
