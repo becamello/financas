@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rebec\\OneDrive\\Documentos\\Finanças\\backend\\src\\Financas.Api\\Financas.Api.csproj": {}
+    "c:\\Users\\rebec\\OneDrive\\Documentos\\Finanças\\backend\\src\\Financas.Api\\Financas.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rebec\\OneDrive\\Documentos\\Finanças\\backend\\src\\Financas.Api\\Financas.Api.csproj": {
+    "c:\\Users\\rebec\\OneDrive\\Documentos\\Finanças\\backend\\src\\Financas.Api\\Financas.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rebec\\OneDrive\\Documentos\\Finanças\\backend\\src\\Financas.Api\\Financas.Api.csproj",
+        "projectUniqueName": "c:\\Users\\rebec\\OneDrive\\Documentos\\Finanças\\backend\\src\\Financas.Api\\Financas.Api.csproj",
         "projectName": "Financas.Api",
-        "projectPath": "C:\\Users\\rebec\\OneDrive\\Documentos\\Finanças\\backend\\src\\Financas.Api\\Financas.Api.csproj",
+        "projectPath": "c:\\Users\\rebec\\OneDrive\\Documentos\\Finanças\\backend\\src\\Financas.Api\\Financas.Api.csproj",
         "packagesPath": "C:\\Users\\rebec\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rebec\\OneDrive\\Documentos\\Finanças\\backend\\src\\Financas.Api\\obj\\",
+        "outputPath": "c:\\Users\\rebec\\OneDrive\\Documentos\\Finanças\\backend\\src\\Financas.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\rebec\\AppData\\Roaming\\NuGet\\NuGet.Config"

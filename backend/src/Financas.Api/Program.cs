@@ -1,5 +1,13 @@
 using System.Text;
+using AutoMapper;
+using Financas.Api.AutoMapper;
+using Financas.Api.Data;
+using Financas.Api.Domain.Repository.Classes;
+using Financas.Api.Domain.Repository.Interfaces;
+using Financas.Api.Domain.Services.Classes;
+using Financas.Api.Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -18,9 +26,29 @@ app.Run();
 // Metodo que configrua as injeções de dependencia do projeto.
 static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
 {
+    string? connectionString = builder.Configuration.GetConnectionString("PADRAO");
+
+    builder.Services.AddDbContext<ApplicationContext>(options =>
+     options.UseNpgsql(connectionString), ServiceLifetime.Transient, ServiceLifetime.Transient);
+
+     var config = new MapperConfiguration(cfg => {
+        cfg.AddProfile<UsuarioProfile>();
+    });
+
+    IMapper mapper = config.CreateMapper();
+
     builder.Services
     .AddSingleton(builder.Configuration)
-    .AddSingleton(builder.Environment);
+    .AddSingleton(builder.Environment)
+    .AddSingleton(mapper)
+    .AddScoped<TokenService>()
+    .AddScoped<IUsuarioRepository, UsuarioRepository>()
+    .AddScoped<IUsuarioService, UsuarioService>();
+}
+
+static object mapper(IServiceProvider provider)
+{
+    throw new NotImplementedException();
 }
 
 // Configura o serviços da API.
@@ -59,7 +87,7 @@ static void ConfigurarServices(WebApplicationBuilder builder)
             }
         });
 
-        c.SwaggerDoc("v1", new OpenApiInfo { Title = "Financas.Api", Version = "v1" });   
+        c.SwaggerDoc("v1", new OpenApiInfo { Title = "Financas.Api", Version = "v1" });
     });
 
     builder.Services.AddAuthentication(x =>
@@ -93,8 +121,8 @@ static void ConfigurarAplicacao(WebApplication app)
     app.UseSwagger()
         .UseSwaggerUI(c =>
         {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Financas.Api v1");
-                c.RoutePrefix = string.Empty;
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "Financas.Api v1");
+            c.RoutePrefix = string.Empty;
         });
 
     app.UseCors(x => x

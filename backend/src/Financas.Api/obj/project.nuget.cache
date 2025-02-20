@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zrxn/tETZ3OzzVzg4n3/2jCuFJVxb0BG9TUP+x8O0qrIwbo8/cXJrTfKaB/AGC/mX1KFiu4sgKv32VUlPcOhWw==",
+  "dgSpecHash": "6Uq1fS+hSuEhuoXcktlpfSBTVAuujwgTLKgg1tQmnvh20tu6PWJA/tsXtXwERNVuZCMXnHiX+coQu8dki3bpOQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rebec\\OneDrive\\Documentos\\Finanças\\backend\\src\\Financas.Api\\Financas.Api.csproj",
+  "projectFilePath": "c:\\Users\\rebec\\OneDrive\\Documentos\\Finanças\\backend\\src\\Financas.Api\\Financas.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rebec\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\rebec\\.nuget\\packages\\fluentvalidation\\10.4.0\\fluentvalidation.10.4.0.nupkg.sha512",

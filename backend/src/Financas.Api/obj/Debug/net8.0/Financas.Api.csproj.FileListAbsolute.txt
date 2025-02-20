@@ -57,3 +57,4 @@ c:\Users\rebec\OneDrive\Documentos\Finanças\backend\src\Financas.Api\obj\Debug\
 c:\Users\rebec\OneDrive\Documentos\Finanças\backend\src\Financas.Api\obj\Debug\net8.0\Financas.Api.pdb
 c:\Users\rebec\OneDrive\Documentos\Finanças\backend\src\Financas.Api\obj\Debug\net8.0\Financas.Api.genruntimeconfig.cache
 c:\Users\rebec\OneDrive\Documentos\Finanças\backend\src\Financas.Api\obj\Debug\net8.0\ref\Financas.Api.dll
+c:\Users\rebec\OneDrive\Documentos\Finanças\backend\src\Financas.Api\obj\Debug\net8.0\Financas.Api.sourcelink.json
