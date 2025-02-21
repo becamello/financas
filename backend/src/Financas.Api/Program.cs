@@ -1,6 +1,7 @@
 using System.Text;
 using AutoMapper;
 using Financas.Api.AutoMapper;
+using Financas.Api.Contract.NaturezaDeLancamento;
 using Financas.Api.Data;
 using Financas.Api.Domain.Repository.Classes;
 using Financas.Api.Domain.Repository.Interfaces;
@@ -33,6 +34,7 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
 
      var config = new MapperConfiguration(cfg => {
         cfg.AddProfile<UsuarioProfile>();
+        cfg.AddProfile<NaturezaDeLancamentoProfile>();
     });
 
     IMapper mapper = config.CreateMapper();
@@ -43,7 +45,9 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
     .AddSingleton(mapper)
     .AddScoped<TokenService>()
     .AddScoped<IUsuarioRepository, UsuarioRepository>()
-    .AddScoped<IUsuarioService, UsuarioService>();
+    .AddScoped<IUsuarioService, UsuarioService>()
+    .AddScoped<INaturezaDeLancamentoRepository, NaturezaDeLancamentoRepository>()
+    .AddScoped<IService<NaturezaDeLancamentoRequestContract, NaturezaDeLancamentoResponseContract, long>, NaturezaDeLancamentoService>();
 }
 
 static object mapper(IServiceProvider provider)
@@ -115,25 +119,28 @@ static void ConfigurarAplicacao(WebApplication app)
 {
     // Configura o contexto do postgreSql para usar timestamp sem time zone.
     AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
     app.UseDeveloperExceptionPage()
-        .UseRouting();
+        .UseRouting();  // A ordem é importante!
 
     app.UseSwagger()
         .UseSwaggerUI(c =>
         {
             c.SwaggerEndpoint("/swagger/v1/swagger.json", "Financas.Api v1");
-            c.RoutePrefix = string.Empty;
+            c.RoutePrefix = string.Empty;  // Garante que o Swagger será acessível na raiz (/)
         });
 
+    // Adiciona a middleware de CORS
     app.UseCors(x => x
         .AllowAnyOrigin() // Permite todas as origens
         .AllowAnyMethod() // Permite todos os métodos
         .AllowAnyHeader()) // Permite todos os cabeçalhos
-        .UseAuthentication();
+        .UseAuthentication();  // Necessário para autenticação de tokens
 
-    app.UseAuthorization();
+    app.UseAuthorization();  // IMPORTANTE: Coloque aqui!
 
-    app.UseEndpoints(endpoints => endpoints.MapControllers());
+    // A ordem de "UseAuthorization()" é essencial para garantir que a autorização seja verificada corretamente.
+    app.UseEndpoints(endpoints => endpoints.MapControllers());  // Mapeia os endpoints dos controllers
 
     app.MapControllers();
 }
