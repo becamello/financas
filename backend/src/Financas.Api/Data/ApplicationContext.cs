@@ -8,6 +8,7 @@ namespace Financas.Api.Data
     {
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<NaturezaDeLancamento> NaturezaDeLancamento { get; set; }
+        public DbSet<Titulo> Titulo { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
 
@@ -15,6 +16,7 @@ namespace Financas.Api.Data
         {
             modelBuilder.ApplyConfiguration(new UsuarioMap());
             modelBuilder.ApplyConfiguration(new NaturezaDeLancamentoMap());
+            modelBuilder.ApplyConfiguration(new TituloMap());
 
         }
     }

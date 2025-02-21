@@ -1,4 +1,5 @@
-using Financas.Api.Contract.NaturezaDeLancamento;
+
+using Financas.Api.Contract.Titulos;
 using Financas.Api.Domain.Services.Interfaces;
 using Financas.Api.Exceptions;
 using Microsoft.AspNetCore.Authorization;
@@ -7,26 +8,29 @@ using Microsoft.AspNetCore.Mvc;
 namespace Financas.Api.Controllers
 {
     [ApiController]
-    [Route("naturezasdelancamento")]
-    public class NaturezaDeLancamentoController : BaseController
+    [Route("titulos")]
+    public class TituloController : BaseController
     {
-        private readonly IService<NaturezaDeLancamentoRequestContract, NaturezaDeLancamentoResponseContract, long> _naturezaDeLancamentoService;
+        private readonly IService<TituloRequestContract, TituloResponseContract, long> _titulosService;
 
         private long _idUsuario;
 
-        public NaturezaDeLancamentoController(IService<NaturezaDeLancamentoRequestContract, NaturezaDeLancamentoResponseContract, long> naturezaDeLancamentoService)
+        public TituloController(IService<TituloRequestContract, TituloResponseContract, long> titulosService)
         {
-            _naturezaDeLancamentoService = naturezaDeLancamentoService;
+            _titulosService = titulosService;
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Adicionar(NaturezaDeLancamentoRequestContract contrato)
+        public async Task<IActionResult> Adicionar(TituloRequestContract contrato)
         {
             try
             {
-                long idUsuarioLogado = ObterIdUsuarioLogado();
-                return Created("", await _naturezaDeLancamentoService.Adicionar(contrato, idUsuarioLogado));
+                _idUsuario = ObterIdUsuarioLogado();
+
+                var resultado = await _titulosService.Adicionar(contrato, _idUsuario);
+
+                return Created("", resultado);
             }
             catch (BadRequestException ex)
             {
@@ -44,12 +48,12 @@ namespace Financas.Api.Controllers
         {
             try
             {
+
                 _idUsuario = ObterIdUsuarioLogado();
-                return Ok(await _naturezaDeLancamentoService.Obter(_idUsuario));
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(RetornarModelNotFound(ex));
+
+                var titulos = await _titulosService.Obter(_idUsuario);
+
+                return Ok(titulos);
             }
             catch (Exception ex)
             {
@@ -64,14 +68,18 @@ namespace Financas.Api.Controllers
         {
             try
             {
+
                 _idUsuario = ObterIdUsuarioLogado();
-                return Ok(await _naturezaDeLancamentoService.Obter(id, _idUsuario));
+
+                var resultado = await _titulosService.Obter(id, _idUsuario);
+
+                return Ok(resultado);
             }
             catch (NotFoundException ex)
             {
                 return NotFound(RetornarModelNotFound(ex));
             }
-            catch (UnauthorizedException ex) 
+            catch (UnauthorizedException ex)  
             {
                 return Unauthorized(new { message = ex.Message });
             }
@@ -84,12 +92,15 @@ namespace Financas.Api.Controllers
         [HttpPut]
         [Route("{id}")]
         [Authorize]
-        public async Task<IActionResult> Atualizar(long id, NaturezaDeLancamentoRequestContract contrato)
+        public async Task<IActionResult> Atualizar(long id, TituloRequestContract contrato)
         {
             try
             {
                 _idUsuario = ObterIdUsuarioLogado();
-                return Ok(await _naturezaDeLancamentoService.Atualizar(id, contrato, _idUsuario));
+
+                var resultado = await _titulosService.Atualizar(id, contrato, _idUsuario);
+
+                return Ok(resultado);
             }
             catch (NotFoundException ex)
             {
@@ -113,7 +124,9 @@ namespace Financas.Api.Controllers
             try
             {
                 _idUsuario = ObterIdUsuarioLogado();
-                await _naturezaDeLancamentoService.Inativar(id, _idUsuario);
+
+                await _titulosService.Inativar(id, _idUsuario);
+
                 return NoContent();
             }
             catch (NotFoundException ex)
@@ -125,5 +138,6 @@ namespace Financas.Api.Controllers
                 return Problem(ex.Message);
             }
         }
+
     }
 }

@@ -2,6 +2,7 @@ using System.Text;
 using AutoMapper;
 using Financas.Api.AutoMapper;
 using Financas.Api.Contract.NaturezaDeLancamento;
+using Financas.Api.Contract.Titulos;
 using Financas.Api.Data;
 using Financas.Api.Domain.Repository.Classes;
 using Financas.Api.Domain.Repository.Interfaces;
@@ -35,6 +36,7 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
      var config = new MapperConfiguration(cfg => {
         cfg.AddProfile<UsuarioProfile>();
         cfg.AddProfile<NaturezaDeLancamentoProfile>();
+        cfg.AddProfile<TituloProfile>();
     });
 
     IMapper mapper = config.CreateMapper();
@@ -47,7 +49,9 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
     .AddScoped<IUsuarioRepository, UsuarioRepository>()
     .AddScoped<IUsuarioService, UsuarioService>()
     .AddScoped<INaturezaDeLancamentoRepository, NaturezaDeLancamentoRepository>()
-    .AddScoped<IService<NaturezaDeLancamentoRequestContract, NaturezaDeLancamentoResponseContract, long>, NaturezaDeLancamentoService>();
+    .AddScoped<IService<NaturezaDeLancamentoRequestContract, NaturezaDeLancamentoResponseContract, long>, NaturezaDeLancamentoService>()
+    .AddScoped<ITituloRepository, TituloRepository>()
+    .AddScoped<IService<TituloRequestContract, TituloResponseContract, long>, TituloService>();
 }
 
 static object mapper(IServiceProvider provider)

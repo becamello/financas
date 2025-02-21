@@ -78,7 +78,7 @@ namespace Financas.Api.Domain.Services.Classes
 
             if (naturezaDeLancamento.IdUsuario != idUsuario)
             {
-                throw new UnauthorizedAccessException($"Você não tem permissão para acessar esta natureza de lançamento.");
+                throw new UnauthorizedException("Você não tem permissão para acessar esta natureza de lançamento.");
             }
 
             return naturezaDeLancamento;
