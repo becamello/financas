@@ -70,6 +70,8 @@
         </v-list>
       </v-container>
     </v-navigation-drawer>
+
+    
   </v-container>
 </template>
 
@@ -80,7 +82,7 @@ export default {
     drawer: true,
     interval: {},
     value: 0,
-    mini: false,
+    mini: true,
   }),
 
   methods: {

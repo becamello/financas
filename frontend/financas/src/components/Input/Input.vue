@@ -2,7 +2,7 @@
     <v-container>
       <v-text-field
         outlined
-        color="var(--primary-color)"
+        color="var(--terciary-color)"
         :label="label"
         :placeholder="placeHolder"
         :type="type"
