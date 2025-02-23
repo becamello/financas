@@ -35,4 +35,8 @@ html {
   min-height: 100vh; /* Garante que o contêiner principal ocupe toda a altura da tela */
 }
 
+.v-toast__item {
+    font-family: 'Roboto', sans-serif !important;
+  }
+
 </style>

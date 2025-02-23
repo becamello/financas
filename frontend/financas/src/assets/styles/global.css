@@ -11,3 +11,6 @@
     --warning-color: #FFC107;
   }
   
+  .toast-container {
+    font-family: 'Roboto', sans-serif !important;
+  }

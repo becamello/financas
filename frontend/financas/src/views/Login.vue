@@ -30,13 +30,24 @@
             dark
             class="btn-login"
             @click="login"
-            >ENTRAR</v-btn
-          >
+            :disabled="isLoading"
+          >ENTRAR</v-btn>
         </v-card-actions>
+
+        <v-overlay v-if="isLoading" absolute :value="isLoading" >
+          <v-progress-circular
+            indeterminate
+            color="var(--primary-color)"
+            size="30"
+            class="ma-0"
+          ></v-progress-circular>
+        </v-overlay>
       </v-card>
     </v-col>
   </v-container>
 </template>
+
+
 
 <script>
 import Input from "@/components/Input/Input.vue";
@@ -54,29 +65,34 @@ export default {
         email: "",
         senha: "",
       },
+      isLoading: false, 
     };
   },
   methods: {
     login() {
       if (!this.usuario.email || !this.usuario.senha) {
-        alert("E-mail e senha do usuário são obrigatórios!")
+        this.$toast.warning('E-mail e senha do usuário são obrigatórios!');
         return;
       }
+
+      this.isLoading = true;
 
       usuarioService
         .login(this.usuario.email, this.usuario.senha)
         .then((response) => {
+          this.isLoading = false;
           
           utilStorage.salvarStorage(response.data.usuario);
           utilStorage.salvarTokenNaStorage(response.data.token);
 
           
-          this.$router.push({ name: "Dashboard" });
+          this.$router.push({ name: "Fluxo de Caixa" });
         })
         .catch((error) => {
           
           console.error(error);
-          alert("E-mail ou senha estão incorretos. Por favor, verifique as informações e tente novamente.")
+          this.isLoading = false;
+          this.$toast.error('Erro ao realizar login! Verifique e-mail e senha');
         });
     },
   }
@@ -86,11 +102,11 @@ export default {
 <style scoped>
 .container-login {
   background-image: url("../assets/background-login.svg");
-  background-size: cover; /* A imagem cobrirá toda a tela */
-  background-position: center center; /* A imagem ficará centralizada */
-  background-repeat: no-repeat; /* A imagem não será repetida */
-  height: 100vh; /* A altura da tela será 100% */
-  margin: 0; /* Remove a margem do body */
+  background-size: cover; 
+  background-position: center center;
+  background-repeat: no-repeat; 
+  height: 100vh; 
+  margin: 0;
   height: 100vh;
   width: 100vw;
 }
@@ -104,6 +120,7 @@ export default {
   justify-content: center;
   align-items: center;
   border-radius: 2rem;
+  position: relative;
 }
 
 .login-title {
