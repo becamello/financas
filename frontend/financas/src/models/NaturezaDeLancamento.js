@@ -4,9 +4,9 @@ export default class NaturezaDeLancamento {
       this.id = obj.id;
       this.idUsuario = obj.idUsuario;
       this.descricao = obj.descricao;
-      this.observacao = this.observacao;
-      this.dataCadastro = this.dataCadastro;
-      this.dataInativacao = this.dataInativacao;
+      this.observacao = obj.observacao;
+      this.dataCadastro = obj.dataCadastro;
+      this.dataInativacao = obj.dataInativacao;
     }
 }
   
