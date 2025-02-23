@@ -18,6 +18,7 @@
             >
           </v-row>
           <Tabela :headers="headers" :items="items" :actions="actions" />
+          
         </v-col>
 
         <v-divider vertical></v-divider>
@@ -202,19 +203,14 @@ export default {
       ],
       actions: [
         {
-          label: 'Editar Título',
           icon: 'mdi-pencil',
+          label: "Editar título"
           // handler: this.editarFuncionario,
         },
         {
-          label: 'Novo Parecer',
-          icon: 'mdi-comment-plus', // Ícone de novo parecer
-          handler: this.novoParecer,
-        },
-        {
-          label: 'Visualizar Pareceres',
           icon: 'mdi-eye', // Ícone de visualização
-          handler: this.visualizarPareceres,
+          label: "Visualizar detalhes"
+          // handler: this.visualizarPareceres,
         },
       ],
     };

@@ -1,4 +1,3 @@
-<!-- components/Tabela.vue -->
 <template>
     <v-data-table
       :headers="headers"
@@ -12,23 +11,34 @@
       <template v-slot:[`item.acoes`]="{ item }">
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
-            <v-icon
-              small
-              v-bind="attrs"
-              v-on="on"
-            >
-              mdi-dots-vertical
-            </v-icon>
+            <v-btn icon v-bind="attrs" v-on="on">
+              <v-icon small>mdi-dots-vertical</v-icon>
+            </v-btn>
           </template>
           <v-list>
-            <!-- Renderizando as ações dinamicamente com ícones -->
             <v-list-item
               v-for="(acao, index) in actions"
               :key="index"
               @click="acao.handler(item)"
             >
-              <v-icon left>{{ acao.icon }}</v-icon> <!-- Exibindo o ícone da ação -->
-              <v-list-item-title>{{ acao.label }}</v-list-item-title>
+              <v-list-item-icon>
+                <v-tooltip top>
+                  <template v-slot:activator="{ on: tooltipOn, attrs: tooltipAttrs }">
+                    <v-icon
+                      small
+                      v-bind="tooltipAttrs"
+                      v-on="tooltipOn"
+                      class="icon-table"
+                    >
+                      {{ acao.icon }}
+                    </v-icon>
+                  </template>
+                  <span>{{ acao.label }}</span>
+                </v-tooltip>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>{{ acao.label }}</v-list-item-title>
+              </v-list-item-content>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -38,7 +48,7 @@
   
   <script>
   export default {
-    name: 'Tabela',
+    name: "Tabela",
     props: {
       headers: {
         type: Array,
@@ -56,30 +66,9 @@
   };
   </script>
   
-  <style scoped>
-  .custom-scroll .v-data-table__wrapper {
-    scrollbar-width: thin; /* Padrão para Firefox */
-    scrollbar-color: #888 #f5f5f5; /* Cor do scroll e fundo */
-  }
-  
-  /* Estiliza a barra de rolagem para Chrome, Edge e Safari */
-  .custom-scroll .v-data-table__wrapper::-webkit-scrollbar {
-    width: 8px; /* Largura da barra de rolagem */
-  }
-  
-  .custom-scroll .v-data-table__wrapper::-webkit-scrollbar-track {
-    background: #f5f5f5; /* Cor do fundo da rolagem */
-    border-radius: 10px;
-  }
-  
-  .custom-scroll .v-data-table__wrapper::-webkit-scrollbar-thumb {
-    background: #888; /* Cor do scroll */
-    border-radius: 10px;
-    transition: background 0.3s ease;
-  }
-  
-  .custom-scroll .v-data-table__wrapper::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Cor mais escura ao passar o mouse */
+  <style>
+  .icon-table {
+    cursor: pointer;
   }
   </style>
   
