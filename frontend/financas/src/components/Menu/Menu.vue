@@ -76,6 +76,8 @@
 </template>
 
 <script>
+import utilStorage from "@/utils/storage";
+
 export default {
   name: "Menu",
   data: () => ({
@@ -90,6 +92,9 @@ export default {
       this.mini = !this.mini;
     },
     logout() {
+      utilStorage.removerStorage();
+      utilStorage.removerTokenNaStorage();
+
       this.$router.replace({ path: "/login" });
     },
   },

@@ -14,12 +14,14 @@
         <v-card-text class="pa-0">
           <Input
             label="E-mail"
-            placeholder="insira seu e-mail de acesso"
+            placeHolder="insira seu e-mail de acesso"
+            v-model="usuario.email"
           />
           <Input
             label="Senha"
-            placeholder="123456"
+            placeHolder="123456"
             type="password"
+            v-model="usuario.senha"
           />
         </v-card-text>
         <v-card-actions class="pa-0 d-flex align-center justify-center">
@@ -27,6 +29,7 @@
             color="var(--primary-color)"
             dark
             class="btn-login"
+            @click="login"
             >ENTRAR</v-btn
           >
         </v-card-actions>
@@ -37,11 +40,45 @@
 
 <script>
 import Input from "@/components/Input/Input.vue";
+import usuarioService from "@/services/usuario-service";
+import utilStorage from "@/utils/storage";
 
 export default {
   name: "Login",
   components: {
     Input,
+  },
+  data() {
+    return {
+      usuario: {
+        email: "",
+        senha: "",
+      },
+    };
+  },
+  methods: {
+    login() {
+      if (!this.usuario.email || !this.usuario.senha) {
+        alert("E-mail e senha do usuário são obrigatórios!")
+        return;
+      }
+
+      usuarioService
+        .login(this.usuario.email, this.usuario.senha)
+        .then((response) => {
+          
+          utilStorage.salvarStorage(response.data.usuario);
+          utilStorage.salvarTokenNaStorage(response.data.token);
+
+          
+          this.$router.push({ name: "Dashboard" });
+        })
+        .catch((error) => {
+          
+          console.error(error);
+          alert("E-mail ou senha estão incorretos. Por favor, verifique as informações e tente novamente.")
+        });
+    },
   }
 };
 </script>

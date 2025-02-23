@@ -9,4 +9,26 @@ const router = new VueRouter({
   routes,
 });
 
+router.beforeEach((to, from, next) => {
+  let token = localStorage.getItem("token");
+  if (to.name === "Login") {
+    if (token) {
+      next({ name: "Fluxo de Caixa" });
+    } else {
+      next();
+    }
+  } else if (to.name === "Fluxo de Caixa") {
+    if (!token || token === "undefined" || token === "") {
+      next({
+        path: "/login",
+        query: { nextUrl: to.fullPath },
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
+
 export default router;
