@@ -3,7 +3,7 @@ import api from "./api";
 function cadastrar(titulo) {
   return new Promise((resolve, reject) => {
     return api
-      .post(`/titulos/`, titulo)
+      .post(`/titulos`, titulo)
       .then((response) => resolve(response))
       .catch((error) => reject(error));
   });
@@ -18,11 +18,9 @@ function obterTodos() {
 }
 function obterPorId(id) {
   return new Promise((resolve, reject) => {
-    console.log("Código do Titulo:", id);
-
     return api
       .get(`/titulos/${id}`)
-      
+
       .then((response) => resolve(response))
       .catch((error) => reject(error));
   });
@@ -30,7 +28,7 @@ function obterPorId(id) {
 function atualizar(titulo) {
   return new Promise((resolve, reject) => {
     return api
-      .put(`/titulos/${titulo.id}`, titulo) 
+      .put(`/titulos/${titulo.id}`, titulo)
       .then((response) => resolve(response))
       .catch((error) => reject(error));
   });
@@ -38,7 +36,7 @@ function atualizar(titulo) {
 function inativar(titulo) {
   return new Promise((resolve, reject) => {
     return api
-      .delete(`/titulos/${titulo.id}`, titulo) 
+      .delete(`/titulos/${titulo.id}`, titulo)
       .then((response) => resolve(response))
       .catch((error) => reject(error));
   });
@@ -49,5 +47,5 @@ export default {
   obterPorId,
   cadastrar,
   atualizar,
-  inativar
+  inativar,
 };

@@ -60,7 +60,7 @@
       },
       actions: {
         type: Array,
-        default: () => [], 
+        default: () => [], // Ações que serão passadas para o componente
       },
     },
   };

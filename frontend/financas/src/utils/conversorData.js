@@ -24,15 +24,33 @@ function formatarDataParaMesAno(data) {
     const dateObj = moment(data, "DD/MM/YYYY");
   
     if (!dateObj.isValid()) {
-      console.log("Data inválida:", data);
       return "";
     }
   
     return dateObj.format("MM/YYYY");
   }
 
+
+  function aplicarMascaraIsoEmFormatoAmericano(data){
+    if(data){ 
+        let dataAmericana = moment(data).locale('pt-br').format('YYYY-MM-DD');
+        return dataAmericana + "T00:00:00";
+    }
+    return undefined;
+}
+  function aplicarMascaraIsoEmFormatoAmericanoSemHorario(data){
+    if(data){ 
+        let dataAmericanaSemHorario = moment(data).locale('pt-br').format('YYYY-MM-DD');
+        return dataAmericanaSemHorario;
+    }
+    return undefined;
+}
+
+
 export default {
     aplicarMascaraEmDataIso,
     aplicarMascaraDataHoraEmDataIso,
-    formatarDataParaMesAno
+    formatarDataParaMesAno,
+    aplicarMascaraIsoEmFormatoAmericano,
+    aplicarMascaraIsoEmFormatoAmericanoSemHorario
 }

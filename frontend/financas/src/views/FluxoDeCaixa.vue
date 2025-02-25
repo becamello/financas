@@ -5,8 +5,8 @@
         <v-col cols="12" md="10" class="pa-0">
           <v-row class="d-flex justify-space-between py-5 px-8">
             <Breadcrumbs />
-            <v-btn color="var(--primary-color)" dark>
-              <v-icon>mdi-plus</v-icon>Adicionar Título
+            <v-btn color="var(--primary-color)" dark @click="telaCadastro">
+              <v-icon>mdi-plus</v-icon>Cadastrar Título
             </v-btn>
           </v-row>
           <Tabela
@@ -67,28 +67,45 @@ export default {
   },
   data() {
     return {
-      search: "",
-      page: 1,
+      dialogVisible: false,
       itemsPerPage: 10,
       titulos: [],
       tipoTituloRadio: "Todos",
       datacadastro: null,
       datapagamento: null,
       naturezaDeLancamento: null,
-      naturezasDeLancamento: [],
       headers: [
-        { text: "Código", value: "id" },
         { text: "Descrição", value: "descricao" },
         { text: "Valor", value: "valorOriginal" },
-        { text: "Natureza de Lançamento", value: "naturezaDeLancamentoDescricao" },
+        {
+          text: "Natureza de Lançamento",
+          value: "naturezaDeLancamentoDescricao",
+        },
         { text: "Tipo do Título", value: "tipoTituloDescricao" },
         { text: "Data de Cadastro", value: "dataCadastro" },
         { text: "Data de Pagamento", value: "dataPagamento" },
         { text: " ", value: "acoes" },
       ],
       actions: [
-        { icon: "mdi-pencil", label: "Editar título" },
+        {
+          icon: "mdi-pencil",
+          label: "Editar título",
+          handler: (titulo) => {
+            this.$router.push({
+              name: "Editar Título",
+              params: { id: titulo.id },
+            });
+          },
+        },
         { icon: "mdi-eye", label: "Visualizar detalhes" },
+        {
+          icon: "mdi-delete",
+          label: "Excluir título",
+          handler: (titulo) => {
+            this.titulo = titulo; 
+            this.inativarTitulo(); 
+          },
+        },
       ],
     };
   },
@@ -96,7 +113,9 @@ export default {
     exibirTitulos() {
       return this.filtrarTitulos().map((titulo) => ({
         ...titulo,
-        valorOriginal: conversorValor.aplicarMascaraParaRealComPrefixo(titulo.valorOriginal),
+        valorOriginal: conversorValor.aplicarMascaraParaRealComPrefixo(
+          titulo.valorOriginal
+        ),
         tipoTituloDescricao: titulo.tipoTituloDescricao,
       }));
     },
@@ -105,19 +124,33 @@ export default {
     },
   },
   methods: {
+    telaCadastro() {
+      this.$router.replace({ name: "Novo Titulo" });
+    },
     obterTodosOsTitulos() {
       tituloService
         .obterTodos()
         .then((response) => {
-          this.titulos = response.data.map((t) => new Titulo(t));
+          this.titulos = response.data.map(
+            (t) =>
+              new Titulo({
+                ...t,
+                dataPagamento: t.dataPagamento
+                  ? conversorData.aplicarMascaraEmDataIso(t.dataPagamento)
+                  : null,
+              })
+          );
         })
         .catch((error) => {
           console.error("Erro ao obter títulos:", error);
         });
     },
-
     filtrarTitulos() {
       return this.titulos.filter((titulo) => {
+        if (titulo.dataInativacao) {
+      return false;
+    }
+
         if (
           this.tipoTituloRadio !== "Todos" &&
           titulo.tipoTituloDescricao !== this.tipoTituloRadio
@@ -142,20 +175,31 @@ export default {
         return true;
       });
     },
-
     compararDatas(dataTitulo, dataFiltro) {
-      const dataFiltroFormatada = conversorData.formatarDataParaMesAno(dataFiltro);
-      const dataTituloFormatada = conversorData.formatarDataParaMesAno(dataTitulo);
+      const dataFiltroFormatada =
+        conversorData.formatarDataParaMesAno(dataFiltro);
+      const dataTituloFormatada =
+        conversorData.formatarDataParaMesAno(dataTitulo);
 
       if (!dataFiltroFormatada) {
-        console.log("Data do Filtro: Inválida");
         return true;
       }
-
-      console.log("Data do Título:", dataTituloFormatada);
-      console.log("Data do Filtro:", dataFiltroFormatada);
-
       return dataTituloFormatada === dataFiltroFormatada;
+    },
+    abrirDialogCadastro() {
+      this.dialogVisible = true;
+    },
+    inativarTitulo() {
+      tituloService
+        .inativar(this.titulo)
+        .then(() => {
+          this.$toast.success("Título excluído com sucesso!");
+          this.obterTodosOsTitulos();
+        })
+        .catch((error) => {
+          console.error("Erro ao inativar funcionário:", error);
+          this.$toast.error("Erro ao excluir titulo.");
+        });
     },
   },
 

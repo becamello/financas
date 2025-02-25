@@ -6,12 +6,14 @@ export default class Titulo {
     this.idUsuario = obj.idUsuario;
     this.naturezaDeLancamentoDescricao = obj.naturezaDeLancamentoDescricao;
     this.descricao = obj.descricao;
-    this.tipoTitulo = obj.tipoTitulo;
+    
+    this.tipoTitulo = obj.tipoTitulo !== undefined && obj.tipoTitulo !== null ? obj.tipoTitulo : null; 
+    
     this.dataCadastro = conversorData.aplicarMascaraEmDataIso(obj.dataCadastro);
     this.dataInativacao = obj.dataInativacao;
     this.observacao = obj.observacao;
     this.valorOriginal = obj.valorOriginal;
-    this.dataPagamento = conversorData.aplicarMascaraEmDataIso(obj.dataPagamento);
+    this.dataPagamento = obj.dataPagamento;
   }
 
   static tipoTituloMap = {
@@ -21,5 +23,13 @@ export default class Titulo {
 
   get tipoTituloDescricao() {
     return Titulo.tipoTituloMap[this.tipoTitulo] || "Desconhecido";
+  }
+
+  modeloValidoParaCadastro() {
+    return !!(this.descricao && this.naturezaDeLancamentoDescricao && this.valorOriginal && this.dataPagamento && this.tipoTitulo !== undefined);
+  }
+
+  modeloValidoParaAtualizar() {
+    return !!(this.descricao && this.naturezaDeLancamentoDescricao && this.valorOriginal && this.dataPagamento && this.tipoTitulo !== undefined);
   }
 }

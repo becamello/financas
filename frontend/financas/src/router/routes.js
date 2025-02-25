@@ -1,5 +1,6 @@
 import Login from '@/views/Login.vue';
 import FluxoDeCaixa from '@/views/FluxoDeCaixa.vue';
+import Titulos from '@/views/Titulos.vue';
 
 const routes = [
     {
@@ -14,6 +15,20 @@ const routes = [
       name: "Fluxo de Caixa",
       component: FluxoDeCaixa,
       title: "Fluxo de Caixa",
+      meta: { requiredAuth: false },
+    },
+    {
+      path: "/fluxo-de-caixa/novo-titulo",
+      name: "Novo Titulo",
+      component: Titulos,
+      title: "Novo Título",
+      meta: { requiredAuth: false },
+    },
+    {
+      path: "/fluxo-de-caixa/editar-titulo/:id",
+      name: "Editar Título",
+      component: Titulos,
+      title: "Editar Título",
       meta: { requiredAuth: false },
     },
 ];

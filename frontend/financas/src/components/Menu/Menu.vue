@@ -7,6 +7,7 @@
       dark
       app
       class="nav-bar"
+      width="12vw"
     >
       <v-container>
         <v-row>
@@ -28,7 +29,7 @@
           </v-list-item-content>
         </v-list-item> -->
         <v-list-item router to="/fluxo-de-caixa">
-          <v-list-item-action>
+          <v-list-item-action class="mr-2">
             <v-icon>mdi-finance</v-icon>
           </v-list-item-action>
           <v-list-item-content>
@@ -60,7 +61,7 @@
             </v-list-item-content>
           </v-list-item> -->
           <v-list-item @click="logout">
-            <v-list-item-action>
+            <v-list-item-action class="mr-2">
               <v-icon>mdi-logout</v-icon>
             </v-list-item-action>
             <v-list-item-content>
@@ -113,9 +114,5 @@ export default {
   position: absolute;
   bottom: 0;
   padding: 0;
-}
-
-.user {
-  padding: 10px;
 }
 </style>
