@@ -52,6 +52,7 @@ namespace Financas.Api.Domain.Repository.Classes
         public async Task<Titulo?> Obter(long id)
         {
             return await _contexto.Titulo.AsNoTracking()
+            .Include(t => t.NaturezaDeLancamento) 
             .Where(n => n.Id == id)
             .FirstOrDefaultAsync();
         }
@@ -59,6 +60,7 @@ namespace Financas.Api.Domain.Repository.Classes
         public async Task<IEnumerable<Titulo>> ObterPeloIdUsuario(long idUsuario)
         {
             return await _contexto.Titulo.AsNoTracking()
+            .Include(t => t.NaturezaDeLancamento) 
             .Where(n => n.IdUsuario == idUsuario)
             .OrderBy(n => n.Id)
             .ToListAsync();
