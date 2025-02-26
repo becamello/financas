@@ -1,6 +1,6 @@
 <template>
   <v-main>
-    <v-container fluid class="pa-10">
+    <v-container fluid class="pa-6">
       <Breadcrumbs />
 
       <v-form ref="form" lazy-validation class="py-5">
@@ -13,6 +13,7 @@
                 :rules="[(v) => !!v || 'A descrição é obrigatória']"
                 label="Descrição"
                 required
+                outlined
                 color="var(--cor-primaria)"
                 class="py-6"
               />
@@ -156,7 +157,7 @@ export default {
       naturezaService
         .obterTodos()
         .then((response) => {
-          this.naturezaDisponiveis = response.data;
+          this.naturezaDisponiveis = response.data.filter((natureza) => !natureza.dataInativacao);
         })
         .catch((error) => {
           console.error("Erro ao buscar naturezas de lançamento:", error);
@@ -191,7 +192,6 @@ export default {
           console.error("Erro ao obter título:", error);
         });
     },
-
     cancelarAcao() {
       this.$router.replace({ name: "Fluxo de Caixa" });
     },

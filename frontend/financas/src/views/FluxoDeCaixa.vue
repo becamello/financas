@@ -38,21 +38,32 @@
               :headers="headers"
               :items="exibirTitulos"
               :actions="actions"
+              :height="460"
             />
           </v-col>
         </v-col>
-          <v-card elevation="0" height="90vh" class="d-flex flex-column py-2">
+        <v-col cols="12" md="2">
+          <v-card elevation="0" height="60vh" class="d-flex flex-column py-2">
             <v-btn
               color="var(--primary-color)"
               dark
               @click="telaCadastro"
-              class="btn-titulo mb-4"
+              class="mb-4"
             >
               <v-icon>mdi-plus</v-icon>
               Novo Título
             </v-btn>
+            <v-btn
+              elevation="1"
+              @click="modalNaturezas"
+              class="btn-natureza mb-4"
+            >
+              Natureza de Lançamento
+            </v-btn>
             <v-divider></v-divider>
-            <h3 style="text-align: center; padding-bottom: 50px" class="mt-4">FILTROS</h3>
+            <h3 style="text-align: center; padding-bottom: 20px" class="mt-4">
+              FILTROS
+            </h3>
             <DataPicker v-model="datacadastro" label="Data Cadastro" />
             <DataPicker v-model="datapagamento" label="Data Pagamento" />
             <v-divider></v-divider>
@@ -75,7 +86,10 @@
               ></v-radio>
             </v-radio-group>
           </v-card>
+        </v-col>
       </v-row>
+
+      <ModalNatureza v-model="dialog" dialogWidth="50vw" />
     </v-container>
   </v-main>
 </template>
@@ -88,6 +102,7 @@ import tituloService from "@/services/titulo-service";
 import Titulo from "@/models/Titulo";
 import conversorValor from "@/utils/conversorValor";
 import conversorData from "@/utils/conversorData";
+import ModalNatureza from "@/components/Natureza/ModalNatureza.vue";
 
 export default {
   name: "FluxoDeCaixa",
@@ -95,9 +110,11 @@ export default {
     DataPicker,
     Tabela,
     Breadcrumbs,
+    ModalNatureza,
   },
   data() {
     return {
+      dialog: false,
       itemsPerPage: 10,
       titulos: [],
       tipoTituloRadio: "Todos",
@@ -262,6 +279,9 @@ export default {
           this.$toast.error("Erro ao excluir titulo.");
         });
     },
+    modalNaturezas() {
+      this.dialog = !this.dialog;
+    },
   },
   created() {
     this.obterTodosOsTitulos();
@@ -270,16 +290,10 @@ export default {
 </script>
 
 <style scoped>
-/* mdi-cash-register */
-/* mdi-hand-coin-outline */
-/* mdi-minus-circle-multiple-outline */
-
-/* Gastos: #F1948A (Vermelho claro)
-Recebimentos: #85C1E9 (Azul claro)
-Saldo Total: #2ECC71 (Verde mais suave) */
-
-.btn-titulo {
-  width: 100%;
+.btn-natureza {
+  background-color: transparent !important;
+  border: 1px solid var(--secondary-color);
+  font-size: 13px;
 }
 
 .cards {

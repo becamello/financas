@@ -6,7 +6,8 @@
       class="elevation-0 custom-scroll"
       no-title
       fixed-header
-      height="460px"
+      :height="height"
+      :hide-default-footer="hideFooter"
     >
       <template v-slot:[`item.acoes`]="{ item }">
         <v-menu offset-y>
@@ -62,6 +63,16 @@
         type: Array,
         default: () => [], // Ações que serão passadas para o componente
       },
+      height: {
+        type: Number
+      },
+      width: {
+        type: Number
+      },
+      hideFooter: { 
+      type: Boolean,
+      default: false, 
+    },
     },
   };
   </script>

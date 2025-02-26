@@ -8,5 +8,14 @@ export default class NaturezaDeLancamento {
       this.dataCadastro = obj.dataCadastro;
       this.dataInativacao = obj.dataInativacao;
     }
+
+
+    modeloValidoParaCadastro() {
+      return !!(this.descricao);
+    }
+  
+    modeloValidoParaAtualizar() {
+      return !!(this.descricao);
+    }
 }
   
