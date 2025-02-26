@@ -3,24 +3,56 @@
     <v-container fluid>
       <v-row>
         <v-col cols="12" md="10" class="pa-0">
-          <v-row class="d-flex justify-space-between py-5 px-8">
+          <v-row class="d-flex justify-space-between py-5 px-8 ml-4">
             <Breadcrumbs />
-            <v-btn color="var(--primary-color)" dark @click="telaCadastro">
-              <v-icon>mdi-plus</v-icon>Cadastrar Título
-            </v-btn>
+
+            <div class="cards">
+              <v-card elevation="1" class="card-valor card-valor-gastos">
+                <v-icon>mdi-minus-circle-multiple-outline</v-icon>
+                <v-card-title>Gastos:</v-card-title>
+                <div class="card-conteudo">
+                  {{ totalGastoExibicao }}
+                </div>
+              </v-card>
+
+              <v-card elevation="1" class="card-valor card-valor-recebimentos">
+                <v-icon>mdi-hand-coin-outline</v-icon>
+                <v-card-title>Recebimentos:</v-card-title>
+                <div class="card-conteudo">
+                  {{ totalRecebimentoExibicao }}
+                </div>
+              </v-card>
+
+              <v-card elevation="1" class="card-valor card-valor-saldo">
+                <v-icon>mdi-cash-register</v-icon>
+                <v-card-title>Saldo Final:</v-card-title>
+                <div class="card-conteudo">
+                  {{ saldoFinalExibicao }}
+                </div>
+              </v-card>
+            </div>
           </v-row>
-          <Tabela
-            :headers="headers"
-            :items="exibirTitulos"
-            :actions="actions"
-          />
+
+          <v-col cols="12" class="px-10 mt-2">
+            <Tabela
+              :headers="headers"
+              :items="exibirTitulos"
+              :actions="actions"
+            />
+          </v-col>
         </v-col>
-
-        <v-divider vertical></v-divider>
-
-        <v-col cols="12" md="2">
-          <v-card elevation="0" height="90vh" class="d-flex flex-column py-4">
-            <h3 style="text-align: center; padding-bottom: 50px">FILTROS</h3>
+          <v-card elevation="0" height="90vh" class="d-flex flex-column py-2">
+            <v-btn
+              color="var(--primary-color)"
+              dark
+              @click="telaCadastro"
+              class="btn-titulo mb-4"
+            >
+              <v-icon>mdi-plus</v-icon>
+              Novo Título
+            </v-btn>
+            <v-divider></v-divider>
+            <h3 style="text-align: center; padding-bottom: 50px" class="mt-4">FILTROS</h3>
             <DataPicker v-model="datacadastro" label="Data Cadastro" />
             <DataPicker v-model="datapagamento" label="Data Pagamento" />
             <v-divider></v-divider>
@@ -43,7 +75,6 @@
               ></v-radio>
             </v-radio-group>
           </v-card>
-        </v-col>
       </v-row>
     </v-container>
   </v-main>
@@ -67,7 +98,6 @@ export default {
   },
   data() {
     return {
-      dialogVisible: false,
       itemsPerPage: 10,
       titulos: [],
       tipoTituloRadio: "Todos",
@@ -84,7 +114,7 @@ export default {
         { text: "Tipo do Título", value: "tipoTituloDescricao" },
         { text: "Data de Cadastro", value: "dataCadastro" },
         { text: "Data de Pagamento", value: "dataPagamento" },
-        { text: " ", value: "acoes" },
+        { text: " ", value: "acoes", sortable: false },
       ],
       actions: [
         {
@@ -102,8 +132,8 @@ export default {
           icon: "mdi-delete",
           label: "Excluir título",
           handler: (titulo) => {
-            this.titulo = titulo; 
-            this.inativarTitulo(); 
+            this.titulo = titulo;
+            this.inativarTitulo();
           },
         },
       ],
@@ -121,6 +151,40 @@ export default {
     },
     totalPages() {
       return Math.ceil(this.titulos.length / this.itemsPerPage);
+    },
+    totalGastos() {
+      return this.exibirTitulos
+        .filter((titulo) => titulo.tipoTitulo === 0)
+        .reduce(
+          (acumulador, titulo) =>
+            acumulador +
+            conversorValor.removerMascaraDeReal(titulo.valorOriginal),
+          0
+        );
+    },
+    totalRecebimentos() {
+      return this.exibirTitulos
+        .filter((titulo) => titulo.tipoTitulo === 1)
+        .reduce(
+          (acumulador, titulo) =>
+            acumulador +
+            conversorValor.removerMascaraDeReal(titulo.valorOriginal),
+          0
+        );
+    },
+    saldoFinal() {
+      return this.totalRecebimentos - this.totalGastos;
+    },
+    totalGastoExibicao() {
+      return conversorValor.aplicarMascaraParaRealComPrefixo(this.totalGastos);
+    },
+    totalRecebimentoExibicao() {
+      return conversorValor.aplicarMascaraParaRealComPrefixo(
+        this.totalRecebimentos
+      );
+    },
+    saldoFinalExibicao() {
+      return conversorValor.aplicarMascaraParaRealComPrefixo(this.saldoFinal);
     },
   },
   methods: {
@@ -148,8 +212,8 @@ export default {
     filtrarTitulos() {
       return this.titulos.filter((titulo) => {
         if (titulo.dataInativacao) {
-      return false;
-    }
+          return false;
+        }
 
         if (
           this.tipoTituloRadio !== "Todos" &&
@@ -186,9 +250,6 @@ export default {
       }
       return dataTituloFormatada === dataFiltroFormatada;
     },
-    abrirDialogCadastro() {
-      this.dialogVisible = true;
-    },
     inativarTitulo() {
       tituloService
         .inativar(this.titulo)
@@ -202,9 +263,56 @@ export default {
         });
     },
   },
-
   created() {
     this.obterTodosOsTitulos();
   },
 };
 </script>
+
+<style scoped>
+/* mdi-cash-register */
+/* mdi-hand-coin-outline */
+/* mdi-minus-circle-multiple-outline */
+
+/* Gastos: #F1948A (Vermelho claro)
+Recebimentos: #85C1E9 (Azul claro)
+Saldo Total: #2ECC71 (Verde mais suave) */
+
+.btn-titulo {
+  width: 100%;
+}
+
+.cards {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 1.2em;
+}
+
+.card-valor {
+  width: 13vw;
+  height: 13vh;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.card-valor-gastos {
+  border-top: 4px solid #f1948a;
+}
+.card-valor-recebimentos {
+  border-top: 4px solid #85c1e9;
+}
+.card-valor-saldo {
+  border-top: 4px solid #2ecc71;
+}
+
+.v-card__title {
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+  padding: 0px;
+}
+</style>

@@ -12,7 +12,13 @@ function aplicarMascaraParaRealComPrefixo(valor){
     return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'});
 }
 
+export function removerMascaraDeReal(valorFormatado) {
+    if (!valorFormatado) return 0;
+    return Number(valorFormatado.replace(/[^\d,.-]/g, "").replace(",", "."));
+  }
+
 export default {
     aplicarMascaraParaReal,
-    aplicarMascaraParaRealComPrefixo
+    aplicarMascaraParaRealComPrefixo,
+    removerMascaraDeReal
 }

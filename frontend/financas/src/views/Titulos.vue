@@ -76,7 +76,6 @@
           </v-row>
           <v-row class="d-flex align-center">
             <v-col cols="12">
-              <v-row class="d-flex align-center">
                 <v-textarea
                   outlined
                   name="Observação"
@@ -84,7 +83,6 @@
                   v-model="titulo.observacao"
                   color="var(--cor-primaria)"
                 ></v-textarea>
-              </v-row>
             </v-col>
           </v-row>
         </v-col>

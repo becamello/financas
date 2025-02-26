@@ -3,10 +3,10 @@
       :headers="headers"
       :items="items"
       :items-per-page="-1"
-      class="elevation-0 mx-8 my-4 custom-scroll"
+      class="elevation-0 custom-scroll"
       no-title
       fixed-header
-      height="520px"
+      height="460px"
     >
       <template v-slot:[`item.acoes`]="{ item }">
         <v-menu offset-y>
@@ -70,5 +70,7 @@
   .icon-table {
     cursor: pointer;
   }
+
+  
   </style>
   

@@ -38,7 +38,7 @@
   <style>
   .v-breadcrumbs__item {
   font-size: 28px;
-  color: var(--primary-color)!important;
+  color: var(--terciary-color)!important;
   font-weight: bold;
 }
 
