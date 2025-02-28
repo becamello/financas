@@ -87,7 +87,7 @@ export default {
   data() {
     return {
       mostrarFormulario: false,
-      modoCadastro: true, // true = cadastro, false = edição
+      modoCadastro: true, 
       itemsPerPage: 10,
       headers: [
         { text: "Descrição", value: "descricao", width: "250px" },
@@ -99,14 +99,12 @@ export default {
           icon: "mdi-pencil",
           label: "Editar natureza",
           handler: (item) => {
-            // Agora, utilizamos o obterPorId para buscar a natureza pelo ID
             naturezaService
-              .obterPorId(item.id)  // Recupera a natureza pelo ID
+              .obterPorId(item.id)  
               .then((response) => {
-                // Preenche o objeto com os dados da natureza
                 this.natureza = new NaturezaDeLancamento(response.data);
                 this.mostrarFormulario = true;
-                this.modoCadastro = false;  // Muda para o modo de edição
+                this.modoCadastro = false;  
               })
               .catch((error) => {
                 console.error("Erro ao obter natureza:", error);
@@ -155,10 +153,9 @@ export default {
         });
     },
     formularioNatureza() {
-      // Prepara o formulário para cadastro
       this.mostrarFormulario = true;
       this.modoCadastro = true;
-      this.natureza = new NaturezaDeLancamento(); // Reseta o formulário
+      this.natureza = new NaturezaDeLancamento(); 
     },
     cancelarFormulario() {
       this.mostrarFormulario = false;
@@ -174,7 +171,7 @@ export default {
         .then(() => {
           this.$toast.success("Natureza cadastrada com sucesso!");
           this.exibirNaturezas();
-          this.natureza = new NaturezaDeLancamento(); // Reseta a natureza
+          this.natureza = new NaturezaDeLancamento(); 
           this.mostrarFormulario = false;
         })
         .catch((error) => {
@@ -205,7 +202,7 @@ export default {
       if (this.modoCadastro) {
         this.cadastrarNatureza();
       } else {
-        this.atualizarNatureza(); // Chama a função para atualizar a natureza
+        this.atualizarNatureza(); 
       }
     },
     inativarNatureza() {

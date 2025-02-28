@@ -314,13 +314,13 @@ export default {
 }
 
 .card-valor-gastos {
-  border-top: 4px solid #f1948a;
+  border-top: 4px solid var(--gasto-color);
 }
 .card-valor-recebimentos {
-  border-top: 4px solid #85c1e9;
+  border-top: 4px solid var(--recebimento-color);
 }
 .card-valor-saldo {
-  border-top: 4px solid #2ecc71;
+  border-top: 4px solid var(--saldo-color);
 }
 
 .v-card__title {

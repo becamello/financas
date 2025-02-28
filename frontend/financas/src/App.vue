@@ -1,23 +1,25 @@
 <template>
   <v-app>
-    <Menu v-if="this.$router.currentRoute.name != 'Login'"/>
-    <router-view></router-view>
+    <Menu v-if="this.$router.currentRoute.name != 'Login'" />
+    <router-view :cores="coresNatureza" />
   </v-app>
 </template>
 
 <script>
-import Menu from './components/Menu/Menu.vue';
+import Menu from "./components/Menu/Menu.vue";
 
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
-    Menu
+    Menu,
   },
 
-  data: () => ({
-    //
-  }),
+  data() {
+    return {
+      // 
+    };
+  },
 };
 </script>
 
@@ -27,8 +29,8 @@ export default {
 }
 
 html {
-  height: 100%; 
-  margin: 0; 
+  height: 100%;
+  margin: 0;
   overflow-y: auto !important;
 }
 #app {
@@ -36,7 +38,6 @@ html {
 }
 
 .v-toast__item {
-    font-family: 'Roboto', sans-serif !important;
-  }
-
+  font-family: "Roboto", sans-serif !important;
+}
 </style>

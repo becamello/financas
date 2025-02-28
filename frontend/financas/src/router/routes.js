@@ -1,6 +1,7 @@
 import Login from '@/views/Login.vue';
 import FluxoDeCaixa from '@/views/FluxoDeCaixa.vue';
 import Titulos from '@/views/Titulos.vue';
+import Dashboard from '@/views/Dashboard.vue';
 
 const routes = [
     {
@@ -8,6 +9,13 @@ const routes = [
       name: "Login",
       component: Login,
       title: "Login",
+      meta: { requiredAuth: false },
+    },
+    {
+      path: "/",
+      name: "Dashboard",
+      component: Dashboard,
+      title: "Dashboard",
       meta: { requiredAuth: false },
     },
     {

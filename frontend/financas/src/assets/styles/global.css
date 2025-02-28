@@ -9,6 +9,11 @@
     --info-color: #2196F3;
     --success-color: #4CAF50;
     --warning-color: #FFC107;
+
+    /* específicas */
+    --gasto-color: #e44a38;
+    --recebimento-color: #56abe4;
+    --saldo-color: #2ecc71;
   }
   
   .toast-container {

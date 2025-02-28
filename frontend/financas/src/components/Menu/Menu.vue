@@ -20,15 +20,15 @@
       </v-container>
 
       <v-list dense>
-        <!-- <v-list-item router to="/">
-          <v-list-item-action>
-            <v-icon>mdi-home</v-icon>
-          </v-list-item-action>
+        <v-list-item router to="/" @click="closeDrawer">
+          <v-list-item-action class="mr-2">
+            <v-icon>mdi-chart-box-outline</v-icon>
+          </v-list-item-action >
           <v-list-item-content >
-            <v-list-item-title class="nav-title">Tela inicial</v-list-item-title>
+            <v-list-item-title class="nav-title">Dashboard</v-list-item-title>
           </v-list-item-content>
-        </v-list-item> -->
-        <v-list-item router to="/fluxo-de-caixa">
+        </v-list-item>
+        <v-list-item router to="/fluxo-de-caixa" @click="closeDrawer">
           <v-list-item-action class="mr-2">
             <v-icon>mdi-finance</v-icon>
           </v-list-item-action>
@@ -92,6 +92,9 @@ export default {
     toggleMini() {
       this.mini = !this.mini;
     },
+    closeDrawer() {
+      this.mini = true;
+  },
     logout() {
       utilStorage.removerStorage();
       utilStorage.removerTokenNaStorage();
@@ -108,6 +111,7 @@ export default {
 
 .nav-title {
   margin-left: 10px;
+  text-align: left;
 }
 
 .nav-footer {

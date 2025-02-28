@@ -61,7 +61,7 @@
       },
       actions: {
         type: Array,
-        default: () => [], // Ações que serão passadas para o componente
+        default: () => [],
       },
       height: {
         type: Number
