@@ -4,6 +4,7 @@ export default class Titulo {
   constructor(obj = {}) {
     this.id = obj.id;
     this.idUsuario = obj.idUsuario;
+    this.idNaturezaDeLancamento = obj.idNaturezaDeLancamento;
     this.naturezaDeLancamentoDescricao = obj.naturezaDeLancamentoDescricao;
     this.descricao = obj.descricao;
     

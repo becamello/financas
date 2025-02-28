@@ -43,7 +43,11 @@
           </v-col>
         </v-col>
         <v-col cols="12" md="2">
-          <v-card elevation="0" style="background: transparent!important;" class="d-flex flex-column py-2">
+          <v-card
+            elevation="0"
+            style="background: transparent !important"
+            class="d-flex flex-column py-2"
+          >
             <v-btn
               color="var(--primary-color)"
               dark
@@ -90,6 +94,226 @@
       </v-row>
 
       <ModalNatureza v-model="dialog" dialogWidth="50vw" />
+
+      <v-dialog v-model="dialogDetalhes" width="50vw">
+        <v-card>
+          <v-card-title>
+            <span class="headline">Detalhes do Título</span>
+          </v-card-title>
+          <v-card-text>
+            <v-list dense>
+              <v-row>
+                <v-col cols="12" md="6">
+                  <v-list-item class="pa-4">
+                    <v-list-item-icon>
+                      <v-icon>mdi-tag</v-icon>
+                      <!-- Ícone para identificador -->
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                      <v-list-item-title
+                        ><strong
+                          >Identificador do Título:</strong
+                        ></v-list-item-title
+                      >
+                      <v-list-item-subtitle>{{
+                        tituloDetalhes.id
+                      }}</v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+
+                  <v-list-item class="pa-4">
+                    <v-list-item-icon>
+                      <v-icon>mdi-account-circle</v-icon>
+                      <!-- Ícone para tipo -->
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                      <v-list-item-title
+                        ><strong>Tipo de Título:</strong></v-list-item-title
+                      >
+                      <v-list-item-subtitle>{{
+                        tituloDetalhes.tipoTituloDescricao
+                      }}</v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+
+                  <v-list-item class="pa-4">
+                    <v-list-item-icon>
+                      <v-icon>mdi-currency-usd</v-icon>
+                      <!-- Ícone para valor -->
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                      <v-list-item-title
+                        ><strong>Valor:</strong></v-list-item-title
+                      >
+                      <v-list-item-subtitle>{{
+                        tituloDetalhes.valorOriginal
+                      }}</v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+
+                  <v-list-item class="pa-4">
+                  <v-list-item-icon>
+                      <v-icon>mdi-tag</v-icon>
+                      <!-- Ícone para identificador -->
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                      <v-list-item-title
+                        ><strong
+                          >Identificador da Natureza de Lançamento:</strong
+                        ></v-list-item-title
+                      >
+                      <v-list-item-subtitle>{{
+                        tituloDetalhes.idNaturezaDeLancamento
+                      }}</v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+
+                
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-list-item class="pa-4">
+                    <v-list-item-icon>
+                      <v-icon>mdi-text-box</v-icon>
+                      <!-- Ícone para descrição -->
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                      <v-list-item-title
+                        ><strong>Descrição:</strong></v-list-item-title
+                      >
+                      <v-list-item-subtitle>{{
+                        tituloDetalhes.descricao
+                      }}</v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+
+                 
+
+                  <v-list-item class="pa-4">
+                    <v-list-item-icon>
+                      <v-icon>mdi-calendar</v-icon>
+                      <!-- Ícone para data de cadastro -->
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                      <v-list-item-title
+                        ><strong>Data de Cadastro:</strong></v-list-item-title
+                      >
+                      <v-list-item-subtitle>{{
+                        tituloDetalhes.dataCadastro
+                      }}</v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+
+                  <v-list-item class="pa-4">
+                    <v-list-item-icon>
+                      <v-icon>mdi-calendar-check</v-icon>
+                      <!-- Ícone para data de pagamento -->
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                      <v-list-item-title
+                        ><strong>Data de Pagamento:</strong></v-list-item-title
+                      >
+                      <v-list-item-subtitle>{{
+                        tituloDetalhes.dataPagamento
+                      }}</v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+                  <v-list-item class="pa-4">
+                    <v-list-item-icon>
+                      <v-icon>mdi-bookmark</v-icon>
+                      <!-- Ícone para natureza -->
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                      <v-list-item-title
+                        ><strong
+                          >Natureza de Lançamento:</strong
+                        ></v-list-item-title
+                      >
+                      <v-list-item-subtitle>{{
+                        tituloDetalhes.naturezaDeLancamentoDescricao
+                      }}</v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-col>
+                <v-col cols="12" md="12">
+
+
+                  <v-list-item>
+                    <v-list-item-icon>
+                      <v-icon>mdi-comment</v-icon>
+                      <!-- Ícone para observações -->
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                      <v-list-item-title
+                        ><strong>Observações:</strong></v-list-item-title
+                      >
+                      <v-list-item-subtitle>{{
+                        tituloDetalhes.observacao
+                      }}</v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-col>
+              </v-row>
+            </v-list>
+          </v-card-text>
+          <v-card-actions class="d-flex justify-end">
+            <v-btn
+              dark
+              color="var(--primary-color)"
+              @click="dialogDetalhes = false"
+              >Fechar</v-btn
+            >
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
+      <!-- <v-dialog v-model="dialogDetalhes" max-width="500px">
+        <v-card>
+          <v-card-title>
+            <span class="headline">Detalhes do Título</span>
+          </v-card-title>
+          <v-card-text>
+            <v-row>
+              <v-col cols="12" md="6">
+                <div>
+                  <strong>Identificador do Título:</strong>
+                  {{ tituloDetalhes.id }}
+                </div>
+                <div>
+                  <strong>Descrição:</strong> {{ tituloDetalhes.descricao }}
+                </div>
+                <div>
+                  <strong>Valor:</strong> {{ tituloDetalhes.valorOriginal }}
+                </div>
+                <div>
+                  <strong>Natureza de Lançamento:</strong>
+                  {{ tituloDetalhes.naturezaDeLancamentoDescricao }}
+                </div>
+                <div>
+                  <strong>Tipo de Título:</strong>
+                  {{ tituloDetalhes.tipoTituloDescricao }}
+                </div>
+                <div>
+                  <strong>Data de Cadastro:</strong>
+                  {{ tituloDetalhes.dataCadastro }}
+                </div>
+                <div>
+                  <strong>Data de Pagamento:</strong>
+                  {{ tituloDetalhes.dataPagamento }}
+                </div>
+                <div>
+                  <strong>Observações:</strong> {{ tituloDetalhes.observacao }}
+                </div>
+              </v-col>
+            </v-row>
+          </v-card-text>
+          <v-card-actions>
+            
+            <v-btn color="primary" @click="dialogDetalhes = false"
+              >Fechar</v-btn
+            >
+          </v-card-actions>
+        </v-card>
+      </v-dialog> -->
     </v-container>
   </v-main>
 </template>
@@ -115,6 +339,17 @@ export default {
   data() {
     return {
       dialog: false,
+      dialogDetalhes: false,
+      tituloDetalhes: {
+        id: null,
+        descricao: "",
+        valorOriginal: "",
+        naturezaDeLancamentoDescricao: "",
+        tipoTituloDescricao: "",
+        dataCadastro: "",
+        dataPagamento: "",
+        observacao: "",
+      },
       itemsPerPage: 10,
       titulos: [],
       tipoTituloRadio: "Todos",
@@ -144,7 +379,13 @@ export default {
             });
           },
         },
-        { icon: "mdi-eye", label: "Visualizar detalhes" },
+        {
+          icon: "mdi-eye",
+          label: "Visualizar detalhes",
+          handler: (titulo) => {
+            this.visualizarDetalhes(titulo);
+          },
+        },
         {
           icon: "mdi-delete",
           label: "Excluir título",
@@ -281,6 +522,10 @@ export default {
     },
     modalNaturezas() {
       this.dialog = !this.dialog;
+    },
+    visualizarDetalhes(titulo) {
+      this.tituloDetalhes = titulo;
+      this.dialogDetalhes = true;
     },
   },
   created() {

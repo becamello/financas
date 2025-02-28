@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <Menu v-if="this.$router.currentRoute.name != 'Login'" />
-    <router-view :cores="coresNatureza" />
+    <router-view />
   </v-app>
 </template>
 
