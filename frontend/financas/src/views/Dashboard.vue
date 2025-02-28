@@ -2,24 +2,26 @@
     <v-container>
       <Breadcrumbs class="pb-10"/>
       <v-row class="d-flex justify-space-between pt-10">
-        
         <v-col cols="7">
-          <!-- Gráfico de Barras - Relação Gasto/Recebimento por Natureza -->
-          <GraficoBarra
-            :categorias="categoriasGraficoBarra"
-            :valores="valoresGraficoBarra"
-            :cores="cores"
-          />
+          <v-card class="pa-5">
+            <GraficoBarra
+              :categorias="categoriasGraficoBarra"
+              :valores="valoresGraficoBarra"
+              :cores="cores"
+            />
+          </v-card>
         </v-col>
+  
         <v-col cols="5">
-          <!-- Gráfico de Pizza - Títulos por Natureza (quantidade de títulos por natureza) -->
-          <GraficoPizza
-            :dados="dadosGraficoPizza"
-            :cores="cores"
-            titulo="Títulos por Natureza"
-            name="Títulos"
-            pointFormat="Gasto: <b>{point.gasto}</b> | Recebimento: <b>{point.recebimento}</b>"
-          />
+          <v-card class="pa-5">
+            <GraficoPizza
+              :dados="dadosGraficoPizza"
+              :cores="cores"
+              titulo="Títulos por Natureza"
+              name="Títulos"
+              pointFormat="Gasto: <b>{point.gasto}</b> | Recebimento: <b>{point.recebimento}</b>"
+            />
+          </v-card>
         </v-col>
       </v-row>
     </v-container>
@@ -59,7 +61,6 @@
           const response = await tituloService.obterTodos(); 
           const titulos = response.data.map((titulo) => new Titulo(titulo)); 
   
-
           const titulosAtivos = titulos.filter(
             (titulo) => !titulo.naturezaDeLancamentoDataInativacao
           );
@@ -74,8 +75,7 @@
             if (tipoTitulo === "Gasto") {
               gastos[descricaoNatureza] = (gastos[descricaoNatureza] || 0) + 1; 
             } else if (tipoTitulo === "Recebimento") {
-              recebimentos[descricaoNatureza] =
-                (recebimentos[descricaoNatureza] || 0) + 1; 
+              recebimentos[descricaoNatureza] = (recebimentos[descricaoNatureza] || 0) + 1; 
             }
           });
   

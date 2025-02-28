@@ -8,7 +8,7 @@
   >
     <template v-slot:activator="{ on, attrs }">
       <v-text-field
-        color="var(--terciary-color)"
+        color="var(--color-default)"
         v-model="formattedDate"
         :label="label"
         prepend-inner-icon="mdi-calendar"

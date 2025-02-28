@@ -14,7 +14,7 @@
                 label="Descrição"
                 required
                 outlined
-                color="var(--cor-primaria)"
+                color="var(--color-default)"
                 class="py-6"
               />
             </v-col>
@@ -25,7 +25,7 @@
                 :items="tipoTitulos"
                 item-text="nome"
                 item-value="id"
-                color="var(--cor-primaria)"
+                color="var(--color-default)"
                 :rules="[
                   (v) =>
                     (v !== undefined && v !== null) ||
@@ -44,7 +44,7 @@
                 :items="naturezaDisponiveis"
                 item-text="descricao"
                 item-value="id"
-                color="var(--cor-primaria)"
+                color="var(--color-default)"
                 :rules="[
                   (v) =>
                     (v !== undefined && v !== null) || 'O cargo é obrigatório',
@@ -59,6 +59,7 @@
                 :rules="[(v) => !!v || 'O valor é obrigatório']"
                 label="Valor"
                 type="number"
+                color="var(--color-default)"
                 required
                 prefix="R$"
                 outlined
@@ -69,6 +70,7 @@
                 v-model="titulo.dataPagamento"
                 :rules="[(v) => !!v || 'A data de pagamento é obrigatória']"
                 label="Data de Pagamento"
+                color="var(--color-default)"
                 required
                 type="date"
                 outlined
@@ -82,7 +84,7 @@
                   name="Observação"
                   label="Observação"
                   v-model="titulo.observacao"
-                  color="var(--cor-primaria)"
+                  color="var(--color-default)"
                 ></v-textarea>
             </v-col>
           </v-row>

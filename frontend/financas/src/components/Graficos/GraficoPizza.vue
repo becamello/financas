@@ -11,26 +11,37 @@ export default {
     highcharts: Chart,
   },
   props: {
-    dados: Array, 
-    cores: Array, 
+    dados: Array,
+    cores: Array,
     titulo: {
       type: String,
       required: true,
     },
     name: {
       type: String,
-      default: "Títulos", 
+      default: "Títulos",
     },
     pointFormat: {
       type: String,
-      default: "Gasto: <b>{point.gasto}</b> | Recebimento: <b>{point.recebimento}</b>",
+      default:
+        "Gasto: <b>{point.gasto}</b> | Recebimento: <b>{point.recebimento}</b>",
     },
   },
   computed: {
+    isDarkMode() {
+      return this.$vuetify.theme.dark;
+    },
     chartOptions() {
       return {
-        chart: { type: "pie" },
-        title: { text: this.titulo }, 
+        chart: { type: "pie", backgroundColor: "transparent" },
+        title: {
+          text: this.titulo,
+          style: {
+            color: this.isDarkMode
+              ? "var(--secondary-darkmode-color)"
+              : "var(--text-light-color)",
+          },
+        },
         credits: {
           enabled: false,
         },
@@ -46,6 +57,9 @@ export default {
               style: {
                 fontSize: "12px",
                 fontWeight: "normal",
+                color: this.isDarkMode
+                  ? "var(--secondary-darkmode-color)"
+                  : "#000",
               },
             },
           },

@@ -26,7 +26,7 @@
       </div>
 
       <v-card-actions v-if="!mostrarFormulario" class="d-flex justify-end">
-        <v-btn color="var(--terciary-color)" text @click="dialog = false">
+        <v-btn color="var(--color-default)" text @click="dialog = false">
           Fechar
         </v-btn>
       </v-card-actions>

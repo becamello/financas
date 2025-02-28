@@ -43,7 +43,7 @@
           </v-col>
         </v-col>
         <v-col cols="12" md="2">
-          <v-card elevation="0" height="60vh" class="d-flex flex-column py-2">
+          <v-card elevation="0" style="background: transparent!important;" class="d-flex flex-column py-2">
             <v-btn
               color="var(--primary-color)"
               dark

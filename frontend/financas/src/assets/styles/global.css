@@ -1,21 +1,26 @@
-
 :root {
-    --primary-color: #27AE60;
-    --secondary-color: #E5E5E5;
-    --terciary-color: #333333;
-    --background-color: #E5E5E5;
-    --accent-color: #82B1FF;
-    --error-color: #FF5252;
-    --info-color: #2196F3;
-    --success-color: #4CAF50;
-    --warning-color: #FFC107;
+  --primary-color: #27AE60;
+  --secondary-color: #E5E5E5;
+  --terciary-color: #333333;
+  --secondary-darkmode-color: #fff;
+  --secondary-lightmode-color: #1a1a1a;
+  --text-hover-dark-color: #bdbdbd;
+  --text-hover-light-color: #3d3d3d;
 
-    /* específicas */
-    --gasto-color: #e44a38;
-    --recebimento-color: #56abe4;
-    --saldo-color: #2ecc71;
-  }
-  
-  .toast-container {
-    font-family: 'Roboto', sans-serif !important;
-  }
+  /* cores personalizadas */
+  --gasto-color: #e44a38;
+  --recebimento-color: #56abe4;
+  --saldo-color: #2ecc71;
+}
+
+/* Para o modo escuro */
+.v-application--is-dark {
+  --color-default: var(--secondary-darkmode-color);
+  --text-hover-color: var(--text-hover-dark-color);
+}
+
+/* Para o modo claro */
+.v-application--is-light {
+  --color-default: var(--secondary-lightmode-color);
+  --text-hover-color: var(--text-hover-light-color);
+}

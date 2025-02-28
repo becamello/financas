@@ -52,14 +52,14 @@
 
       <v-container class="nav-footer">
         <v-list dense>
-          <!-- <v-list-item>
-            <v-list-item-action>
+          <v-list-item @click="$vuetify.theme.dark = ! $vuetify.theme.dark">
+            <v-list-item-action class="mr-2">
               <v-icon>mdi-theme-light-dark</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title class="nav-title">Alterar tema</v-list-item-title>
             </v-list-item-content>
-          </v-list-item> -->
+          </v-list-item>
           <v-list-item @click="logout">
             <v-list-item-action class="mr-2">
               <v-icon>mdi-logout</v-icon>

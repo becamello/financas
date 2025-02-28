@@ -38,12 +38,12 @@
   <style>
   .v-breadcrumbs__item {
   font-size: 28px;
-  color: var(--terciary-color)!important;
+  color: var(--color-default) !important;;
   font-weight: bold;
 }
 
 .v-breadcrumbs__item--active {
   font-weight: bold;
-  color: var(--terciary-color); 
+  color: var(--color-default) !important;; 
 }
   </style>
