@@ -12,10 +12,10 @@ namespace Financas.Api.Domain.Services.Classes
 {
     public class UsuarioService : IUsuarioService
     {
-         private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IUsuarioRepository _usuarioRepository;
         private readonly IMapper _mapper;
 
-         private readonly TokenService _tokenService;
+        private readonly TokenService _tokenService;
 
         public UsuarioService(
             IUsuarioRepository usuarioRepository,
@@ -54,26 +54,33 @@ namespace Financas.Api.Domain.Services.Classes
 
         public async Task<UsuarioLoginResponseContract> Autenticar(UsuarioLoginRequestContract usuarioLoginRequest)
         {
-            UsuarioResponseContract usuario = await Obter(usuarioLoginRequest.Email);
-        
+            var usuario = await _usuarioRepository.Obter(usuarioLoginRequest.Email);
+
+            if (usuario is null)
+                throw new AuthenticationException("E-mail não localizado");
+
+            if (usuario.DataInativacao is not null)
+                throw new AuthenticationException("O usuário encontra-se inativo");
+
             var hashSenha = GerarHashSenha(usuarioLoginRequest.Senha);
 
-            if(usuario is null || usuario.Senha != hashSenha)
+            if (usuario.Senha != hashSenha)
             {
-                throw new AuthenticationException("Usuário ou senha inválida.");
+                throw new AuthenticationException("Senha inválida.");
             }
 
-            return new UsuarioLoginResponseContract {
+            return new UsuarioLoginResponseContract
+            {
                 Id = usuario.Id,
                 Email = usuario.Email,
-                Token = _tokenService.GerarToken(_mapper.Map<Usuario>(usuario))
-            };        
+                Token = _tokenService.GerarToken(usuario)
+            };
         }
 
         public async Task Inativar(long id, long idUsuario)
         {
             var usuario = await _usuarioRepository.Obter(id) ?? throw new NotFoundException("Usuario não encontrado para inativação.");
-            
+
             await _usuarioRepository.Deletar(_mapper.Map<Usuario>(usuario));
         }
 
@@ -93,20 +100,26 @@ namespace Financas.Api.Domain.Services.Classes
         public async Task<UsuarioResponseContract> Obter(long id, long idUsuario)
         {
             var usuario = await _usuarioRepository.Obter(id);
+
+            if (usuario == null)
+            {
+                throw new NotFoundException("Usuário não encontrado.");
+            }
+
             return _mapper.Map<UsuarioResponseContract>(usuario);
         }
 
-         private string GerarHashSenha(string senha)
+        private string GerarHashSenha(string senha)
         {
             string hashSenha;
 
-            using(SHA256 sha256 = SHA256.Create())
+            using (SHA256 sha256 = SHA256.Create())
             {
                 byte[] bytesSenha = Encoding.UTF8.GetBytes(senha);
                 byte[] bytesHashSenha = sha256.ComputeHash(bytesSenha);
-                hashSenha = BitConverter.ToString(bytesHashSenha).Replace("-","").Replace("-","").ToLower();
+                hashSenha = BitConverter.ToString(bytesHashSenha).Replace("-", "").Replace("-", "").ToLower();
             }
-            
+
             return hashSenha;
         }
     }

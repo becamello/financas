@@ -121,30 +121,29 @@ static void ConfigurarServices(WebApplicationBuilder builder)
 // Configura os serviços na aplicação.
 static void ConfigurarAplicacao(WebApplication app)
 {
-    // Configura o contexto do postgreSql para usar timestamp sem time zone.
     AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
     app.UseDeveloperExceptionPage()
-        .UseRouting();  // A ordem é importante!
+        .UseRouting();  
 
     app.UseSwagger()
         .UseSwaggerUI(c =>
         {
             c.SwaggerEndpoint("/swagger/v1/swagger.json", "Financas.Api v1");
-            c.RoutePrefix = string.Empty;  // Garante que o Swagger será acessível na raiz (/)
+            c.RoutePrefix = string.Empty;  
         });
 
-    // Adiciona a middleware de CORS
     app.UseCors(x => x
-        .AllowAnyOrigin() // Permite todas as origens
-        .AllowAnyMethod() // Permite todos os métodos
-        .AllowAnyHeader()) // Permite todos os cabeçalhos
-        .UseAuthentication();  // Necessário para autenticação de tokens
+        .AllowAnyOrigin() 
+        .AllowAnyMethod() 
+        .AllowAnyHeader()) 
+        .UseAuthentication(); 
 
-    app.UseAuthorization();  // IMPORTANTE: Coloque aqui!
+    app.UseAuthorization(); 
 
-    // A ordem de "UseAuthorization()" é essencial para garantir que a autorização seja verificada corretamente.
-    app.UseEndpoints(endpoints => endpoints.MapControllers());  // Mapeia os endpoints dos controllers
+    app.UseEndpoints(endpoints => endpoints.MapControllers()); 
 
     app.MapControllers();
 }
+
+public partial class Program { }

@@ -34,9 +34,8 @@ namespace Financas.Api.Data.Mappings
             .IsRequired();
 
             builder.Property(p => p.DataPagamento)
-            .HasColumnType("timestamp")
-            .IsRequired();
-            
+            .HasColumnType("timestamp");
+                        
             builder.Property(p => p.DataInativacao)
             .HasColumnType("timestamp");
         }

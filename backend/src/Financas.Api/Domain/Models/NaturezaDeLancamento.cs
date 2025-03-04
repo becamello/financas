@@ -8,6 +8,7 @@ namespace Financas.Api.Domain.Models
         public long Id { get; set; }
 
         [Required]
+        [Range(1, long.MaxValue, ErrorMessage = "O ID do usuário deve ser maior que zero.")]
         public long IdUsuario { get; set; }
         public Usuario Usuario { get; set; }
 
