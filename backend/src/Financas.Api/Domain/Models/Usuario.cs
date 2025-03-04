@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Financas.Api.Domain.Enums;
 
 namespace Financas.Api.Domain.Models
 {
@@ -16,6 +17,9 @@ namespace Financas.Api.Domain.Models
 
         [Required(ErrorMessage = "O campo de senha é obrigatório.")]
         public string Senha { get; set; } = string.Empty;
+
+        [Required]
+        public RoleEnum? Role { get; set; }
 
         [Required]
         public DateTime DataCadastro { get; set; }

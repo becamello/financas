@@ -12,8 +12,6 @@ namespace Financas.Api.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "apagar");
 
             migrationBuilder.CreateTable(
                 name: "titulo",

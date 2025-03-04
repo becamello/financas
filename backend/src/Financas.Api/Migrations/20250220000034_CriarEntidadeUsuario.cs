@@ -20,6 +20,7 @@ namespace Financas.Api.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Email = table.Column<string>(type: "VARCHAR", nullable: false),
                     Senha = table.Column<string>(type: "VARCHAR", nullable: false),
+                    Role = table.Column<string>(type: "integer", nullable: false),
                     DataCadastro = table.Column<DateTime>(type: "timestamp", nullable: false),
                     DataInativacao = table.Column<DateTime>(type: "timestamp", nullable: true)
                 },

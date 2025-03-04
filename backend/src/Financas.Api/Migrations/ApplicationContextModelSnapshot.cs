@@ -118,6 +118,9 @@ namespace Financas.Api.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR");
 
+                    b.Property<int>("Role")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("VARCHAR");

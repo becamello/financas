@@ -40,11 +40,12 @@ namespace Financas.Api.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Adicionar(UsuarioRequestContract contrato)
         {
             try
             {
+
                 return Created("", await _usuarioService.Adicionar(contrato, 0));
             }
             catch (NotFoundException ex)
@@ -62,7 +63,7 @@ namespace Financas.Api.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Obter()
         {
             try
@@ -77,11 +78,12 @@ namespace Financas.Api.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        [Authorize]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Obter(long id)
         {
             try
             {
+
                 return Ok(await _usuarioService.Obter(id, 0));
             }
             catch (NotFoundException ex)
@@ -96,13 +98,14 @@ namespace Financas.Api.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        [Authorize]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Atualizar(long id, UsuarioRequestContract contrato)
         {
             try
             {
                 return Ok(await _usuarioService.Atualizar(id, contrato, 0));
             }
+
             catch (NotFoundException ex)
             {
                 return NotFound(RetornarModelNotFound(ex));
@@ -119,7 +122,7 @@ namespace Financas.Api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
-        [Authorize]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Deletar(long id)
         {
             try

@@ -109,7 +109,7 @@ namespace Financas.Api.Domain.Services.Classes
             return _mapper.Map<UsuarioResponseContract>(usuario);
         }
 
-        private string GerarHashSenha(string senha)
+        public string GerarHashSenha(string senha)
         {
             string hashSenha;
 

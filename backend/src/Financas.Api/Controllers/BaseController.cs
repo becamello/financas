@@ -8,11 +8,11 @@ namespace Financas.Api.Controllers
 {
     public class BaseController : ControllerBase
     {
-          protected long _idUsuario; 
+        protected long _idUsuario;
         protected long ObterIdUsuarioLogado()
         {
             var id = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            
+
             long.TryParse(id, out long idUsuario);
 
             return idUsuario;
@@ -20,7 +20,8 @@ namespace Financas.Api.Controllers
 
         protected ModelErrorContract RetornarModelBadRequest(Exception ex)
         {
-            return new ModelErrorContract {
+            return new ModelErrorContract
+            {
                 Status = 400,
                 Title = "Bad Request",
                 Message = ex.Message,
@@ -30,7 +31,8 @@ namespace Financas.Api.Controllers
 
         protected ModelErrorContract RetornarModelNotFound(Exception ex)
         {
-            return new ModelErrorContract {
+            return new ModelErrorContract
+            {
                 Status = 404,
                 Title = "Not Found",
                 Message = ex.Message,
@@ -40,13 +42,14 @@ namespace Financas.Api.Controllers
 
         protected ModelErrorContract RetornarModelUnauthorized(Exception ex)
         {
-            return new ModelErrorContract {
+            return new ModelErrorContract
+            {
                 Status = 401,
                 Title = "Unauthorized",
                 Message = ex.Message,
                 DateTime = DateTime.Now
             };
-        }        
-    }    
-    
+        }
+    }
+
 }

@@ -21,6 +21,20 @@ ConfigurarInjecaoDeDependencia(builder);
 
 var app = builder.Build();
 
+app.Lifetime.ApplicationStarted.Register(() =>
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        var context = services.GetRequiredService<ApplicationContext>();
+        var usuarioService = services.GetRequiredService<UsuarioService>();
+
+        Console.WriteLine("🚀 Chamando DbInitializer...");
+        DbInitializer.Initialize(context, usuarioService);
+    }
+});
+
+
 ConfigurarAplicacao(app);
 
 app.Run();
@@ -33,7 +47,8 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
     builder.Services.AddDbContext<ApplicationContext>(options =>
      options.UseNpgsql(connectionString), ServiceLifetime.Transient, ServiceLifetime.Transient);
 
-     var config = new MapperConfiguration(cfg => {
+    var config = new MapperConfiguration(cfg =>
+    {
         cfg.AddProfile<UsuarioProfile>();
         cfg.AddProfile<NaturezaDeLancamentoProfile>();
         cfg.AddProfile<TituloProfile>();
@@ -47,6 +62,7 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
     .AddSingleton(mapper)
     .AddScoped<TokenService>()
     .AddScoped<IUsuarioRepository, UsuarioRepository>()
+    .AddScoped<UsuarioService>()
     .AddScoped<IUsuarioService, UsuarioService>()
     .AddScoped<INaturezaDeLancamentoRepository, NaturezaDeLancamentoRepository>()
     .AddScoped<IService<NaturezaDeLancamentoRequestContract, NaturezaDeLancamentoResponseContract, long>, NaturezaDeLancamentoService>()
@@ -104,6 +120,8 @@ static void ConfigurarServices(WebApplicationBuilder builder)
         x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     })
 
+
+
     .AddJwtBearer(x =>
     {
         x.RequireHttpsMetadata = false;
@@ -116,6 +134,11 @@ static void ConfigurarServices(WebApplicationBuilder builder)
             ValidateAudience = false
         };
     });
+
+    builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+});
 }
 
 // Configura os serviços na aplicação.
@@ -124,24 +147,24 @@ static void ConfigurarAplicacao(WebApplication app)
     AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
     app.UseDeveloperExceptionPage()
-        .UseRouting();  
+        .UseRouting();
 
     app.UseSwagger()
         .UseSwaggerUI(c =>
         {
             c.SwaggerEndpoint("/swagger/v1/swagger.json", "Financas.Api v1");
-            c.RoutePrefix = string.Empty;  
+            c.RoutePrefix = string.Empty;
         });
 
     app.UseCors(x => x
-        .AllowAnyOrigin() 
-        .AllowAnyMethod() 
-        .AllowAnyHeader()) 
-        .UseAuthentication(); 
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader())
+        .UseAuthentication();
 
-    app.UseAuthorization(); 
+    app.UseAuthorization();
 
-    app.UseEndpoints(endpoints => endpoints.MapControllers()); 
+    app.UseEndpoints(endpoints => endpoints.MapControllers());
 
     app.MapControllers();
 }
