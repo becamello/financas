@@ -2,6 +2,8 @@ import Login from '@/views/Login.vue';
 import FluxoDeCaixa from '@/views/FluxoDeCaixa.vue';
 import Titulos from '@/views/Titulos.vue';
 import Dashboard from '@/views/Dashboard.vue';
+import AcessoNegado from '@/views/AcessoNegado.vue';
+import Usuario from '@/views/Usuario.vue';
 
 const routes = [
     {
@@ -38,6 +40,20 @@ const routes = [
       component: Titulos,
       title: "Editar Título",
       meta: { requiredAuth: false },
+    },
+    {
+      path: "/acesso-negado",
+      name: "AcessoNegado",
+      component: AcessoNegado,
+      title: "Acesso Negado",
+      meta: { requiredAuth: false }, // Não precisa estar autenticado para visualizar essa página
+    },
+    {
+      path: "/usuarios",
+      name: "Usuários",
+      component: Usuario,
+      title: "Usuários",
+      meta: { requiredAuth: true, isAdmin: true }, // Exige que o usuário seja Admin
     },
 ];
 

@@ -38,7 +38,7 @@
             >
           </v-list-item-content>
         </v-list-item>
-        <!-- <v-list-item router to="/usuarios">
+        <v-list-item v-if="isAdmin" router to="/usuarios">
           <v-list-item-action>
             <v-icon>mdi-account-multiple</v-icon>
           </v-list-item-action>
@@ -47,7 +47,7 @@
               >Usuários</v-list-item-title
             >
           </v-list-item-content>
-        </v-list-item> -->
+        </v-list-item>
       </v-list>
 
       <v-container class="nav-footer">
@@ -78,6 +78,7 @@
 
 <script>
 import utilStorage from "@/utils/storage";
+import { jwtDecode } from "jwt-decode";
 
 export default {
   name: "Menu",
@@ -87,7 +88,20 @@ export default {
     value: 0,
     mini: true,
   }),
-
+  computed: {
+    isAdmin() {
+      const token = localStorage.getItem("token");
+      if (token) {
+        try {
+          const decodedToken = jwtDecode(token);
+          return decodedToken.role === 'Admin'; // Verificando se o papel é 'Admin'
+        } catch (error) {
+          return false; // Se não conseguir decodificar o token, assume que não é admin
+        }
+      }
+      return false; // Se não houver token, assume que não é admin
+    },
+  },
   methods: {
     toggleMini() {
       this.mini = !this.mini;

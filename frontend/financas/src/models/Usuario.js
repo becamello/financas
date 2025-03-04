@@ -5,5 +5,6 @@ export default class Usuario {
     this.email = obj.email;
     this.senha = obj.senha;
     this.token = obj.token;
+    this.role = obj.role;
   }
 }
