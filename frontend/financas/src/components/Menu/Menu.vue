@@ -94,12 +94,12 @@ export default {
       if (token) {
         try {
           const decodedToken = jwtDecode(token);
-          return decodedToken.role === 'Admin'; // Verificando se o papel é 'Admin'
+          return decodedToken.role === 'Admin'; 
         } catch (error) {
-          return false; // Se não conseguir decodificar o token, assume que não é admin
+          return false;
         }
       }
-      return false; // Se não houver token, assume que não é admin
+      return false; 
     },
   },
   methods: {

@@ -23,7 +23,7 @@ export default {
   name: "AcessoNegado",
   methods: {
     redirecionarParaDashboard() {
-      this.$router.push({ name: "Dashboard" }); // Redireciona o usuário de volta para o dashboard
+      this.$router.push({ name: "Dashboard" });
     },
   },
 };

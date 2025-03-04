@@ -46,14 +46,14 @@ const routes = [
       name: "AcessoNegado",
       component: AcessoNegado,
       title: "Acesso Negado",
-      meta: { requiredAuth: false }, // Não precisa estar autenticado para visualizar essa página
+      meta: { requiredAuth: false }, 
     },
     {
       path: "/usuarios",
       name: "Usuários",
       component: Usuario,
       title: "Usuários",
-      meta: { requiredAuth: true, isAdmin: true }, // Exige que o usuário seja Admin
+      meta: { requiredAuth: true, isAdmin: true }, 
     },
 ];
 
