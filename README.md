@@ -28,6 +28,7 @@ Antes de começar, certifique-se de ter instalado:
    cd backend/src/Financas.Api
 3. Compile e execute a API:
    ```bash
+   dotnet build
    dotnet run
 ### 🔧 Passos para Rodar o Frontend (Vue.js)
 1. Instale as dependências: 
