@@ -39,7 +39,7 @@
           </v-list-item-content>
         </v-list-item>
         <v-list-item v-if="isAdmin" router to="/usuarios">
-          <v-list-item-action>
+          <v-list-item-action class="mr-2">
             <v-icon>mdi-account-multiple</v-icon>
           </v-list-item-action>
           <v-list-item-content>

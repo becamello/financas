@@ -47,7 +47,7 @@
                 color="var(--color-default)"
                 :rules="[
                   (v) =>
-                    (v !== undefined && v !== null) || 'O cargo é obrigatório',
+                    (v !== undefined && v !== null) || 'A natureza de lançamento é obrigatória',
                 ]"
                 required
                 outlined

@@ -3,7 +3,7 @@ import FluxoDeCaixa from '@/views/FluxoDeCaixa.vue';
 import Titulos from '@/views/Titulos.vue';
 import Dashboard from '@/views/Dashboard.vue';
 import AcessoNegado from '@/views/AcessoNegado.vue';
-import Usuario from '@/views/Usuario.vue';
+import ControleUsuario from '@/views/ControleUsuario.vue';
 
 const routes = [
     {
@@ -51,10 +51,11 @@ const routes = [
     {
       path: "/usuarios",
       name: "Usuários",
-      component: Usuario,
+      component: ControleUsuario,
       title: "Usuários",
       meta: { requiredAuth: true, isAdmin: true }, 
     },
+
 ];
 
 export default routes;
