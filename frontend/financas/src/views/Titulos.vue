@@ -3,10 +3,10 @@
     <v-container fluid class="pa-6">
       <Breadcrumbs />
 
-      <v-form ref="form" lazy-validation class="py-5">
+      <v-form ref="form" lazy-validation>
         <v-col cols="12">
           <v-row class="d-flex align-center">
-            <v-col cols="9">
+            <v-col cols="12" md="9" sm="12">
               <v-text-field
                 elevation="0"
                 v-model="titulo.descricao"
@@ -15,10 +15,9 @@
                 required
                 outlined
                 color="var(--color-default)"
-                class="py-6"
               />
             </v-col>
-            <v-col cols="3">
+            <v-col cols="12" md="3" sm="12">
               <v-select
                 label="Tipo de título"
                 v-model="titulo.tipoTitulo"
@@ -37,7 +36,7 @@
             </v-col>
           </v-row>
           <v-row class="d-flex align-center">
-            <v-col cols="6">
+            <v-col cols="12" md="6" sm="12">
               <v-select
                 label="Natureza de Lançamento"
                 v-model="titulo.naturezaDeLancamentoDescricao"
@@ -53,7 +52,7 @@
                 outlined
               />
             </v-col>
-            <v-col cols="3">
+            <v-col cols="12" md="3" sm="12">
               <v-text-field
                 v-model="titulo.valorOriginal"
                 :rules="[(v) => !!v || 'O valor é obrigatório']"
@@ -65,7 +64,7 @@
                 outlined
               />
             </v-col>
-            <v-col cols="3">
+            <v-col cols="12" md="3" sm="12">
               <v-text-field
                 v-model="titulo.dataPagamento"
                 :rules="[(v) => !!v || 'A data de pagamento é obrigatória']"
@@ -78,7 +77,7 @@
             </v-col>
           </v-row>
           <v-row class="d-flex align-center">
-            <v-col cols="12">
+            <v-col cols="12" md="12">
                 <v-textarea
                   outlined
                   name="Observação"
@@ -93,7 +92,7 @@
 
       <v-divider class="pb-6"></v-divider>
 
-      <v-row class="rodape pt-10">
+      <v-row class="rodape">
         <v-btn @click="cancelarAcao">Cancelar</v-btn>
         <v-btn
           class="ml-4"

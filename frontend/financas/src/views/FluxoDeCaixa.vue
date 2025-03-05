@@ -6,8 +6,8 @@
           <v-row class="d-flex justify-space-between py-5 px-8 ml-4">
             <Breadcrumbs />
 
-            <v-row>
-              <div class="cards">
+            <v-row class="cards">
+              <v-col cols="12" sm="4" md="3">
                 <v-card elevation="1" class="card-valor card-valor-gastos">
                   <v-icon>mdi-minus-circle-multiple-outline</v-icon>
                   <v-card-title>Gastos:</v-card-title>
@@ -15,7 +15,9 @@
                     {{ totalGastoExibicao }}
                   </div>
                 </v-card>
+              </v-col>
 
+              <v-col cols="12" sm="4" md="3" >
                 <v-card
                   elevation="1"
                   class="card-valor card-valor-recebimentos"
@@ -26,7 +28,9 @@
                     {{ totalRecebimentoExibicao }}
                   </div>
                 </v-card>
+              </v-col>
 
+              <v-col cols="12" sm="4" md="3" >
                 <v-card elevation="1" class="card-valor card-valor-saldo">
                   <v-icon>mdi-cash-register</v-icon>
                   <v-card-title>Saldo Final:</v-card-title>
@@ -34,7 +38,7 @@
                     {{ saldoFinalExibicao }}
                   </div>
                 </v-card>
-              </div>
+              </v-col>
             </v-row>
           </v-row>
 
@@ -43,7 +47,7 @@
               :headers="headers"
               :items="exibirTitulos"
               :actions="actions"
-              :height="420"
+              :height="400"
             />
           </v-col>
         </v-col>
@@ -239,7 +243,6 @@
                   <v-list-item>
                     <v-list-item-icon>
                       <v-icon>mdi-comment</v-icon>
-                      <!-- Ícone para observações -->
                     </v-list-item-icon>
                     <v-list-item-content>
                       <v-list-item-title
@@ -490,22 +493,21 @@ export default {
   border: 1px solid var(--secondary-color);
   font-size: 12px;
 }
-
 .cards {
   display: flex;
-  justify-content: space-between;
-  margin-right: 1.2em;
+  justify-content: end; 
+  flex-wrap: wrap; 
 }
 
 .card-valor {
-  width: 13vw;
-  height: 13vh;
+  width: 90%;
+  height: auto;
+  padding: 8px;
   border-radius: 12px;
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin-left: 20px;
+  text-align: center;
 }
 
 .card-valor-gastos {

@@ -3,6 +3,7 @@
     v-model="dialog"
     :max-width="dialogWidth"
     :max-height="dialogHeight"
+    :fullscreen="$vuetify.breakpoint.mobile"
     persistent
   >
     <v-card class="card-dialog">

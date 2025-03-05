@@ -34,7 +34,7 @@ html {
   overflow-y: auto !important;
 }
 #app {
-  min-height: 100vh; /* Garante que o contêiner principal ocupe toda a altura da tela */
+  min-height: 100vh;
 }
 
 .v-toast__item {

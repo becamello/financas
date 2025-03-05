@@ -1,21 +1,21 @@
 <template>
   <v-main>
-    <v-container fluid class="pa-6">
+    <v-container fluid class="pa-6 pt-0">
       <Breadcrumbs />
 
+      
       <v-row class="d-flex justify-end">
         <v-btn
           color="var(--primary-color)"
           dark
           @click="abrirModalUsuario"
-          class="mb-4"
+          class="ma-3"
         >
           Controle dos Usuários
         </v-btn>
       </v-row>
-
-      <v-row class="d-flex justify-space-between pt-10">
-        <v-col cols="6">
+      <v-row class="d-flex justify-space-between">
+        <v-col cols="12" md="6" sm="12">
           <v-card class="pa-5">
             <GraficoPizza
               :dados="dadosGraficoPizzaRole"
@@ -27,7 +27,7 @@
           </v-card>
         </v-col>
 
-        <v-col cols="6">
+        <v-col cols="12" md="6" sm="12">
           <v-card class="pa-5">
             <GraficoPizza
               :dados="dadosGraficoPizzaStatus"

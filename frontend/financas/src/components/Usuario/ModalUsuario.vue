@@ -3,6 +3,7 @@
       v-model="dialog"
       :max-width="dialogWidth"
       :max-height="dialogHeight"
+      :fullscreen="$vuetify.breakpoint.mobile"
       persistent
     >
       <v-card class="card-dialog">
@@ -40,7 +41,7 @@
             </v-col>
           <v-col cols="12">
             <v-row class="d-flex align-center">
-              <v-col cols="8">
+              <v-col cols="12" md="8" sm="12">
                 <v-text-field
                   elevation="0"
                   v-model="usuario.email"
@@ -51,7 +52,7 @@
                   color="var(--color-default)"
                 />
               </v-col>
-              <v-col cols="4">
+              <v-col cols="12" md="4" sm="12">
                 <v-text-field
                 :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                 :type="show ? 'text' : 'password'"
@@ -102,7 +103,7 @@
         itemsPerPage: 10,
         headers: [
         { text: "Id", value: "id", width: "100px" },
-        { text: "E-mail", value: "email", width: "600px" },
+        { text: "E-mail", value: "email", width: "500px" },
         { text: "Função", value: "roleDescricao" },
         { text: "Status", value: "status" },
         {

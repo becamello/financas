@@ -1,5 +1,5 @@
 <template>
-    <v-container style="width: 400px;" class="ma-0 pa-0">
+    <v-container style="width: 200px;" class="ma-0 pa-0">
       <v-breadcrumbs :items="breadcrumbs" class="ma-0 pa-0" ></v-breadcrumbs>
       <router-view></router-view>
     </v-container>

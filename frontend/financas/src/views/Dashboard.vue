@@ -1,8 +1,11 @@
 <template>
-    <v-container>
+  <v-main>
+
+
+    <v-container class="pt-0" >
       <Breadcrumbs class="pb-10"/>
-      <v-row class="d-flex justify-space-between pt-10">
-        <v-col cols="7">
+      <v-row>
+        <v-col cols="12" md="6" sm="12">
           <v-card class="pa-5">
             <GraficoBarra
               :categorias="categoriasGraficoBarra"
@@ -12,7 +15,7 @@
           </v-card>
         </v-col>
   
-        <v-col cols="5">
+        <v-col cols="12" md="6"  sm="12">
           <v-card class="pa-5">
             <GraficoPizza
               :dados="dadosGraficoPizza"
@@ -25,6 +28,7 @@
         </v-col>
       </v-row>
     </v-container>
+  </v-main>
   </template>
   
   <script>
